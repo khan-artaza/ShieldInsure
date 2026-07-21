@@ -2,86 +2,86 @@
 @using Final_Insure.Models
 @{
     ViewData["Title"] = "Staff Onboarding";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="d-flex align-items-center justify-content-center py-5" style="min-height: 90vh; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); padding-top: 120px !important;">
+<div class="auth-bg">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8 col-lg-6">
+            <div class="col-sm-11 col-md-8 col-lg-6">
 
-                <!-- Brand Header -->
                 <div class="text-center mb-4">
-                    <a class="navbar-brand fw-bold fs-3 text-white text-decoration-none" asp-controller="Home" asp-action="Index">
-                        <i class="fa-solid fa-shield-halved text-info me-2"></i>Shield<span style="color: #38bdf8;">Insure</span>
+                    <a asp-controller="Home" asp-action="Index" class="d-inline-flex align-items-center gap-2 text-decoration-none">
+                        <div class="auth-logo-icon">
+                            <i class="fa-solid fa-shield-halved text-info fs-5"></i>
+                        </div>
+                        <span class="fw-800 fs-4 text-white">Shield<span style="color:#38bdf8;">Insure</span></span>
                     </a>
-                    <p class="text-secondary small mt-1 font-monospace">EMPLOYEE IDENTITY GENERATION</p>
+                    <p class="text-muted mt-2 mb-0 tracking-wide" style="font-size:.75rem; letter-spacing:.1em; font-weight:600;">EMPLOYEE IDENTITY GENERATION</p>
                 </div>
 
-                <!-- Glassmorphism Card -->
-                <div class="card border-0 shadow-lg rounded-4 p-4 p-md-5" style="background: rgba(255, 255, 255, 0.98);">
-                    <div class="mb-4 text-center">
-                        <h4 class="fw-bolder text-dark mb-1">Register New Staff</h4>
-                        <p class="text-muted small mb-0">Configure department role and access credentials.</p>
+                <div class="auth-card">
+                    <div class="text-center mb-4">
+                        <h4 class="fw-800 mb-1">Register New Staff</h4>
+                        <p class="text-muted mb-0" style="font-size:.875rem;">Configure department role and access credentials.</p>
                     </div>
 
-                    <!-- Warning Badge for Admin Approval -->
-                    <div class="alert border-0 rounded-3 py-2 px-3 small fw-semibold mb-4 d-flex align-items-center gap-2" style="background-color: rgba(245, 158, 11, 0.1); color: #b45309;">
-                        <i class="fa-solid fa-user-lock"></i>
-                        <span>Requires Super Admin approval before network access is granted.</span>
+                    <div class="alert alert-warning d-flex align-items-center gap-2 mb-4 py-2 px-3">
+                        <i class="fa-solid fa-user-lock flex-shrink-0"></i>
+                        <span style="font-size:.85rem; font-weight:600;">Requires Super Admin approval before network access is granted.</span>
                     </div>
 
                     <form asp-controller="Auth" asp-action="RegisterStaff" method="post">
-
-                        <!-- Role Selection -->
                         <div class="mb-3">
-                            <label asp-for="Role" class="form-label fw-bold text-muted small text-uppercase tracking-wide">Department Role <span class="text-danger">*</span></label>
-                            <select asp-for="Role" class="form-select form-select-lg bg-light border-0 fw-semibold text-dark" asp-items="@(ViewBag.Roles as SelectList)" required>
+                            <label asp-for="Role" class="form-label">Department Role <span class="text-danger">*</span></label>
+                            <select asp-for="Role" class="form-select" asp-items="@(ViewBag.Roles as SelectList)" required>
                                 <option value="">-- Select Access Level --</option>
                             </select>
-                            <span asp-validation-for="Role" class="text-danger small mt-1 d-block"></span>
+                            <span asp-validation-for="Role" class="text-danger" style="font-size:.8rem;"></span>
                         </div>
 
                         <div class="mb-3">
-                            <label asp-for="Username" class="form-label fw-bold text-muted small text-uppercase tracking-wide">Full Name <span class="text-danger">*</span></label>
-                            <div class="position-relative">
-                                <i class="fa-solid fa-user position-absolute text-muted" style="left: 16px; top: 50%; transform: translateY(-50%);"></i>
-                                <input asp-for="Username" class="form-control form-control-lg bg-light border-0" style="padding-left: 45px; font-size: 0.95rem;" placeholder="e.g. Rajesh Kumar" required />
+                            <label asp-for="Username" class="form-label">Full Name <span class="text-danger">*</span></label>
+                            <div class="form-control-icon">
+                                <i class="fa-solid fa-user"></i>
+                                <input asp-for="Username" class="form-control" placeholder="e.g. Rajesh Kumar" required />
                             </div>
-                            <span asp-validation-for="Username" class="text-danger small mt-1 d-block"></span>
+                            <span asp-validation-for="Username" class="text-danger" style="font-size:.8rem;"></span>
                         </div>
 
                         <div class="mb-3">
-                            <label asp-for="Email" class="form-label fw-bold text-muted small text-uppercase tracking-wide">Official Email <span class="text-danger">*</span></label>
-                            <div class="position-relative">
-                                <i class="fa-solid fa-envelope position-absolute text-muted" style="left: 16px; top: 50%; transform: translateY(-50%);"></i>
-                                <input asp-for="Email" type="email" class="form-control form-control-lg bg-light border-0" style="padding-left: 45px; font-size: 0.95rem;" placeholder="staff@shieldinsure.com" required />
+                            <label asp-for="Email" class="form-label">Official Email <span class="text-danger">*</span></label>
+                            <div class="form-control-icon">
+                                <i class="fa-solid fa-envelope"></i>
+                                <input asp-for="Email" type="email" class="form-control" placeholder="staff@shieldinsure.com" required />
                             </div>
-                            <span asp-validation-for="Email" class="text-danger small mt-1 d-block"></span>
+                            <span asp-validation-for="Email" class="text-danger" style="font-size:.8rem;"></span>
                         </div>
 
                         <div class="mb-4">
-                            <label asp-for="Password" class="form-label fw-bold text-muted small text-uppercase tracking-wide">Temporary Password <span class="text-danger">*</span></label>
-                            <div class="position-relative">
-                                <i class="fa-solid fa-key position-absolute text-muted" style="left: 16px; top: 50%; transform: translateY(-50%);"></i>
-                                <input asp-for="Password" type="password" class="form-control form-control-lg bg-light border-0" style="padding-left: 45px; font-size: 0.95rem;" placeholder="Create strong password" required />
+                            <label asp-for="Password" class="form-label">Temporary Password <span class="text-danger">*</span></label>
+                            <div class="form-control-icon">
+                                <i class="fa-solid fa-key"></i>
+                                <input asp-for="Password" type="password" class="form-control" placeholder="Create strong password" required />
                             </div>
-                            <span asp-validation-for="Password" class="text-danger small mt-1 d-block"></span>
+                            <span asp-validation-for="Password" class="text-danger" style="font-size:.8rem;"></span>
                         </div>
 
-                        <button type="submit" class="btn btn-lg w-100 fw-bold shadow-sm rounded-3 text-white transition-all py-3" style="background-color: #0f172a;">
+                        <button type="submit" class="btn w-100 py-3 fw-bold rounded-3 text-white" style="background:#0f172a;">
                             <i class="fa-solid fa-user-plus me-2 text-info"></i> Submit for Approval
                         </button>
                     </form>
 
-                    <div class="text-center mt-4 border-top pt-4">
-                        <p class="text-muted small mb-0">
-                            Already registered? <a asp-controller="Auth" asp-action="StaffLogin" class="text-decoration-none fw-bold" style="color: #0f172a;">Sign In</a>
+                    <div class="text-center mt-4 pt-4 border-top">
+                        <p class="text-muted mb-0" style="font-size:.875rem;">
+                            Already registered?
+                            <a asp-controller="Auth" asp-action="StaffLogin" class="fw-bold text-decoration-none" style="color:#0f172a;">Sign In</a>
                         </p>
                     </div>
                 </div>
 
-                <div class="text-center mt-4 mb-4">
-                    <a asp-controller="Home" asp-action="Index" class="text-decoration-none text-secondary small fw-semibold">
+                <div class="text-center mt-3">
+                    <a asp-controller="Home" asp-action="Index" class="text-muted text-decoration-none fw-600" style="font-size:.85rem;">
                         <i class="fa-solid fa-arrow-left me-1"></i> Back to Homepage
                     </a>
                 </div>

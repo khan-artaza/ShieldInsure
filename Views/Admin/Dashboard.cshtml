@@ -1,139 +1,180 @@
 ﻿@model IEnumerable<Final_Insure.Models.User>
 @{
     ViewData["Title"] = "System Administration";
+    int totalStaff    = Model?.Count() ?? 0;
+    int approvedStaff = Model?.Count(u => u.IsApproved) ?? 0;
+    int pendingStaff  = Model?.Count(u => !u.IsApproved) ?? 0;
 }
 
-<div class="container-fluid py-3">
-    <!-- Operational Dark Theme Wrapper -->
-    <div class="p-4 rounded-4 shadow-lg" style="background: linear-gradient(145deg, #0f172a, #020617); border: 1px solid #1e293b; min-height: 85vh;">
+<style>
+.ops-stat { border-radius:14px;padding:1.2rem 1.4rem;display:flex;align-items:center;gap:.9rem;transition:all .22s ease; }
+.ops-stat:hover { transform:translateY(-2px); }
+.ops-stat-icon { width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.15rem;flex-shrink:0; }
+.ops-stat-label { font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#475569;margin-bottom:3px; }
+.ops-stat-value { font-size:1.8rem;font-weight:900;line-height:1; }
+</style>
 
-        <!-- Ops Header -->
-        <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-4" style="border-color: #1e293b !important;">
-            <div>
-                <h3 class="fw-bolder mb-1" style="color: #f8fafc; letter-spacing: -0.5px;">
-                    <i class="fa-solid fa-server me-2" style="color: #38bdf8;"></i> Super Admin Ops Center
-                </h3>
-                <p class="mb-0" style="color: #94a3b8; font-family: monospace; font-size: 0.85rem;">
-                    SYS_ADMIN // ACCESS_MANAGEMENT & POLICY_DEPLOYMENT
-                </p>
+<div style="background:linear-gradient(155deg,#0b1427 0%,#060d1c 100%);border:1px solid #1e293b;border-radius:20px;padding:1.75rem;min-height:85vh;">
+
+    <!-- Header -->
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem;padding-bottom:1.5rem;border-bottom:1px solid #1e293b;margin-bottom:1.5rem;">
+        <div>
+            <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.4rem;">
+                <span style="width:8px;height:8px;border-radius:50%;background:#38bdf8;display:inline-block;box-shadow:0 0 8px #38bdf8;"></span>
+                <span style="font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#38bdf8;">SYSTEM ONLINE</span>
             </div>
-            <div>
-                <a asp-action="CreatePolicy" class="btn fw-bold shadow text-dark" style="background-color: #38bdf8; border: none; letter-spacing: 0.5px;">
-                    <i class="fa-solid fa-cloud-arrow-up me-2"></i> Deploy New Policy
-                </a>
+            <h2 style="color:#f8fafc;font-weight:900;letter-spacing:-.5px;margin:0;font-size:1.6rem;">
+                <i class="fa-solid fa-server me-2" style="color:#38bdf8;font-size:1.2rem;"></i>
+                Super Admin Ops Center
+            </h2>
+            <p style="color:#475569;font-family:monospace;font-size:.78rem;margin:.25rem 0 0;">
+                SYS_ADMIN &nbsp;// &nbsp;ACCESS_MANAGEMENT &amp; POLICY_DEPLOYMENT
+            </p>
+        </div>
+        <a asp-action="CreatePolicy"
+           style="display:inline-flex;align-items:center;gap:7px;background:#38bdf8;color:#0b1427;font-weight:800;font-size:.875rem;padding:10px 22px;border-radius:10px;text-decoration:none;transition:all .2s;box-shadow:0 4px 18px rgba(56,189,248,.3);">
+            <i class="fa-solid fa-cloud-arrow-up"></i> Deploy New Policy
+        </a>
+    </div>
+
+    <!-- Stat Cards -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div style="background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);border-radius:10px;padding:.75rem 1rem;margin-bottom:1.25rem;display:flex;align-items:center;gap:.6rem;color:#34d399;font-size:.875rem;font-weight:600;">
+            <i class="fa-solid fa-shield-check"></i> @TempData["SuccessMessage"]
+            <button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="alert" aria-label="Close" onclick="this.parentElement.style.display='none'"></button>
+        </div>
+    }
+
+    <div class="row g-3 mb-4">
+        <div class="col-sm-4">
+            <div class="ops-stat" style="background:#0f172a;border:1px solid #1e293b;">
+                <div class="ops-stat-icon" style="background:rgba(56,189,248,.1);">
+                    <i class="fa-solid fa-users" style="color:#38bdf8;"></i>
+                </div>
+                <div>
+                    <div class="ops-stat-label">Total Staff</div>
+                    <div class="ops-stat-value" style="color:#f8fafc;">@totalStaff</div>
+                </div>
             </div>
         </div>
-
-        <!-- Terminal Alerts -->
-        @if (TempData["SuccessMessage"] != null)
-        {
-            <div class="alert alert-dismissible fade show border-0 rounded-3 mb-4" role="alert" style="background-color: rgba(16, 185, 129, 0.1); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.2) !important;">
-                <i class="fa-solid fa-shield-check me-2"></i> @TempData["SuccessMessage"]
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+        <div class="col-sm-4">
+            <div class="ops-stat" style="background:#0f172a;border:1px solid #1e293b;">
+                <div class="ops-stat-icon" style="background:rgba(16,185,129,.1);">
+                    <i class="fa-solid fa-user-check" style="color:#10b981;"></i>
+                </div>
+                <div>
+                    <div class="ops-stat-label">Active / Approved</div>
+                    <div class="ops-stat-value" style="color:#34d399;">@approvedStaff</div>
+                </div>
             </div>
-        }
-
-        <!-- Data Terminal (Card) -->
-        <div class="card border-0 shadow-none rounded-3" style="background-color: #0f172a; border: 1px solid #1e293b !important;">
-            <div class="card-header py-3 d-flex align-items-center" style="background-color: #1e293b; border-bottom: 1px solid #334155;">
-                <div style="width: 10px; height: 10px; border-radius: 50%; background-color: #10b981; margin-right: 12px; box-shadow: 0 0 10px #10b981; animation: pulse 2s infinite;"></div>
-                <h6 class="mb-0 fw-bold" style="color: #e2e8f0; letter-spacing: 1px; font-size: 0.85rem;">STAFF IDENTITY & ACCESS MATRIX</h6>
-            </div>
-            <div class="card-body p-0">
-                @if (Model != null && Model.Any())
-                {
-                    <div class="table-responsive">
-                        <!-- Bootstrap table-dark overridden with custom sleek dark styles -->
-                        <table class="table table-hover table-dark align-middle mb-0" style="background-color: transparent; --bs-table-bg: transparent; --bs-table-hover-bg: rgba(255, 255, 255, 0.03);">
-                            <thead style="background-color: #0f172a;">
-                                <tr>
-                                    <th class="ps-4" style="color: #64748b; font-size: 0.75rem; border-bottom: 1px solid #334155; padding-top: 1rem; padding-bottom: 1rem;">Identity Name</th>
-                                    <th style="color: #64748b; font-size: 0.75rem; border-bottom: 1px solid #334155;">Comm Protocol (Email)</th>
-                                    <th style="color: #64748b; font-size: 0.75rem; border-bottom: 1px solid #334155;">Clearance Level</th>
-                                    <th style="color: #64748b; font-size: 0.75rem; border-bottom: 1px solid #334155;">Network Status</th>
-                                    <th class="text-end pe-4" style="color: #64748b; font-size: 0.75rem; border-bottom: 1px solid #334155;">Override Command</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var staff in Model)
-                                {
-                                    <tr style="border-bottom: 1px solid #1e293b;">
-                                        <td class="ps-4 fw-bold" style="color: #f1f5f9; padding-top: 1rem; padding-bottom: 1rem;">@staff.Username</td>
-                                        <td style="color: #94a3b8; font-family: monospace; font-size: 0.9rem;">@staff.Email</td>
-                                        <td>
-                                            <span class="badge rounded-pill px-3" style="background-color: #1e293b; color: #cbd5e1; border: 1px solid #475569;">
-                                                <i class="fa-solid fa-id-card-clip me-1 text-muted"></i> @staff.Role
-                                            </span>
-                                        </td>
-                                        <td>
-                                            @if (staff.IsApproved)
-                                            {
-                                                <span class="badge rounded-pill px-3 py-2" style="background-color: rgba(16, 185, 129, 0.1); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.2);">
-                                                    <i class="fa-solid fa-circle-dot me-1" style="font-size: 0.5rem; vertical-align: middle;"></i> SECURE / ACTIVE
-                                                </span>
-                                            }
-                                            else
-                                            {
-                                                <span class="badge rounded-pill px-3 py-2" style="background-color: rgba(245, 158, 11, 0.1); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.2);">
-                                                    <i class="fa-solid fa-triangle-exclamation me-1"></i> PENDING AUTH
-                                                </span>
-                                            }
-                                        </td>
-                                        <td class="text-end pe-4">
-                                            @if (!staff.IsApproved)
-                                            {
-                                                <form asp-action="ApproveStaff" method="post" class="d-inline">
-                                                    <input type="hidden" name="userId" value="@staff.UserId" />
-                                                    <button type="submit" class="btn btn-sm fw-bold me-2" style="background-color: rgba(16, 185, 129, 0.1); color: #34d399; border: 1px solid #34d399; letter-spacing: 1px;">
-                                                        GRANT
-                                                    </button>
-                                                </form>
-                                                <form asp-action="RejectStaff" method="post" class="d-inline">
-                                                    <input type="hidden" name="userId" value="@staff.UserId" />
-                                                    <button type="submit" class="btn btn-sm fw-bold" style="background-color: rgba(239, 68, 68, 0.1); color: #f87171; border: 1px solid #f87171; letter-spacing: 1px;">
-                                                        DENY
-                                                    </button>
-                                                </form>
-                                            }
-                                            else
-                                            {
-                                                <span style="color: #64748b; font-family: monospace; font-size: 0.8rem;">
-                                                    <i class="fa-solid fa-lock text-muted me-1"></i> NO_ACTION
-                                                </span>
-                                            }
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                }
-                else
-                {
-                    <div class="p-5 text-center" style="color: #64748b;">
-                        <i class="fa-solid fa-radar fs-1 mb-3 d-block" style="color: #334155;"></i>
-                        <h6 class="fw-bold" style="color: #94a3b8; letter-spacing: 1px;">NO IDENTITIES DETECTED</h6>
-                        <p class="small mb-0" style="font-family: monospace;">System query returned 0 staff records.</p>
-                    </div>
-                }
+        </div>
+        <div class="col-sm-4">
+            <div class="ops-stat" style="background:#0f172a;border:1px solid #1e293b;">
+                <div class="ops-stat-icon" style="background:rgba(245,158,11,.1);">
+                    <i class="fa-solid fa-user-clock" style="color:#f59e0b;"></i>
+                </div>
+                <div>
+                    <div class="ops-stat-label">Pending Auth</div>
+                    <div class="ops-stat-value" style="color:#fbbf24;">@pendingStaff</div>
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- Staff Table Card -->
+    <div style="background:#0f172a;border:1px solid #1e293b;border-radius:14px;overflow:hidden;">
+        <div style="display:flex;align-items:center;gap:.75rem;padding:.9rem 1.25rem;background:#182034;border-bottom:1px solid #1e293b;">
+            <span class="pulse-dot"></span>
+            <h6 style="color:#cbd5e1;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin:0;">
+                Staff Identity &amp; Access Matrix
+            </h6>
+        </div>
+        <div>
+            @if (Model != null && Model.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-dark align-middle mb-0 ops-table" style="--bs-table-bg:transparent;--bs-table-hover-bg:rgba(255,255,255,.03);">
+                        <thead>
+                            <tr>
+                                <th class="ps-4" style="color:#475569;font-size:.7rem;letter-spacing:.1em;border-bottom:1px solid #1e293b;padding:.8rem .75rem;background:transparent;">Identity Name</th>
+                                <th style="color:#475569;font-size:.7rem;letter-spacing:.1em;border-bottom:1px solid #1e293b;background:transparent;">Email</th>
+                                <th style="color:#475569;font-size:.7rem;letter-spacing:.1em;border-bottom:1px solid #1e293b;background:transparent;">Clearance Level</th>
+                                <th style="color:#475569;font-size:.7rem;letter-spacing:.1em;border-bottom:1px solid #1e293b;background:transparent;">Network Status</th>
+                                <th class="text-end pe-4" style="color:#475569;font-size:.7rem;letter-spacing:.1em;border-bottom:1px solid #1e293b;background:transparent;">Command</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var staff in Model)
+                        {
+                            <tr style="border-bottom:1px solid #1a2540;">
+                                <td class="ps-4" style="color:#e2e8f0;font-weight:700;padding:1rem .75rem;border-bottom:1px solid #1a2540;">
+                                    <div style="display:flex;align-items:center;gap:.6rem;">
+                                        <div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#1e3a5f,#0c387a);display:flex;align-items:center;justify-content:center;color:#93c5fd;font-weight:800;font-size:.85rem;flex-shrink:0;">
+                                            @staff.Username.Substring(0,1).ToUpper()
+                                        </div>
+                                        @staff.Username
+                                    </div>
+                                </td>
+                                <td style="color:#64748b;font-family:monospace;font-size:.85rem;border-bottom:1px solid #1a2540;">@staff.Email</td>
+                                <td style="border-bottom:1px solid #1a2540;">
+                                    <span style="display:inline-flex;align-items:center;gap:5px;background:#182034;color:#94a3b8;border:1px solid #334155;border-radius:8px;padding:3px 10px;font-size:.75rem;font-weight:600;">
+                                        <i class="fa-solid fa-id-badge" style="font-size:.65rem;"></i> @staff.Role
+                                    </span>
+                                </td>
+                                <td style="border-bottom:1px solid #1a2540;">
+                                    @if (staff.IsApproved)
+                                    {
+                                        <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(16,185,129,.1);color:#34d399;border:1px solid rgba(16,185,129,.25);border-radius:8px;padding:3px 10px;font-size:.75rem;font-weight:700;">
+                                            <span style="width:6px;height:6px;border-radius:50%;background:#10b981;"></span>
+                                            ACTIVE
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(245,158,11,.1);color:#fbbf24;border:1px solid rgba(245,158,11,.25);border-radius:8px;padding:3px 10px;font-size:.75rem;font-weight:700;">
+                                            <i class="fa-solid fa-triangle-exclamation" style="font-size:.65rem;"></i>
+                                            PENDING
+                                        </span>
+                                    }
+                                </td>
+                                <td class="text-end pe-4" style="border-bottom:1px solid #1a2540;">
+                                    @if (!staff.IsApproved)
+                                    {
+                                        <form asp-action="ApproveStaff" method="post" class="d-inline">
+                                            <input type="hidden" name="userId" value="@staff.UserId" />
+                                            <button type="submit" style="display:inline-flex;align-items:center;gap:4px;padding:5px 12px;border-radius:7px;font-size:.75rem;font-weight:800;background:rgba(16,185,129,.1);color:#34d399;border:1px solid #34d399;cursor:pointer;transition:all .2s;margin-right:6px;">
+                                                <i class="fa-solid fa-check"></i> GRANT
+                                            </button>
+                                        </form>
+                                        <form asp-action="RejectStaff" method="post" class="d-inline">
+                                            <input type="hidden" name="userId" value="@staff.UserId" />
+                                            <button type="submit" style="display:inline-flex;align-items:center;gap:4px;padding:5px 12px;border-radius:7px;font-size:.75rem;font-weight:800;background:rgba(239,68,68,.1);color:#f87171;border:1px solid #f87171;cursor:pointer;transition:all .2s;">
+                                                <i class="fa-solid fa-times"></i> DENY
+                                            </button>
+                                        </form>
+                                    }
+                                    else
+                                    {
+                                        <span style="color:#334155;font-family:monospace;font-size:.75rem;">
+                                            <i class="fa-solid fa-lock me-1"></i>NO_ACTION
+                                        </span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div style="padding:4rem;text-align:center;color:#334155;">
+                    <i class="fa-solid fa-satellite-dish" style="font-size:3rem;color:#1e293b;margin-bottom:1rem;display:block;"></i>
+                    <h6 style="color:#475569;letter-spacing:.08em;text-transform:uppercase;font-weight:700;">NO IDENTITIES DETECTED</h6>
+                    <p style="font-family:monospace;font-size:.82rem;color:#334155;margin:0;">System query returned 0 staff records.</p>
+                </div>
+            }
+        </div>
+    </div>
 </div>
-
-<style>
-    /* Small CSS animation for the active indicator light */
-    @@keyframes pulse {
-        0% {
-            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-        }
-
-        70% {
-            box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
-        }
-
-        100% {
-            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
-        }
-    }
-</style>

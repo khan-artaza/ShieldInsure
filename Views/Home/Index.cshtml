@@ -2,242 +2,461 @@
     ViewData["Title"] = "ShieldInsure – India's Trusted Vehicle Insurance";
 }
 
-<!-- Custom Styles for Clean Light Theme Animations -->
 <style>
-    .light-hero-bg {
-        background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%);
-    }
+/* ── INDEX PAGE EXCLUSIVE STYLES ── */
+.hero-section {
+    background: linear-gradient(135deg, #060e1e 0%, #0c1f3f 55%, #0a2a5e 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 80px;
+    position: relative;
+    overflow: hidden;
+}
+.hero-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 70% 50%, rgba(56,189,248,0.07) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 40% at 20% 80%, rgba(99,102,241,0.06) 0%, transparent 60%);
+    pointer-events: none;
+}
+.hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(56,189,248,0.12);
+    border: 1px solid rgba(56,189,248,0.25);
+    border-radius: 50px;
+    padding: 6px 16px 6px 8px;
+    margin-bottom: 1.5rem;
+}
+.hero-badge-dot {
+    width: 22px; height: 22px;
+    background: #38bdf8;
+    color: #0c1f3f;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.65rem;
+    font-weight: 800;
+}
+.hero-title {
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -2px;
+    color: #ffffff;
+}
+.hero-title span { color: #38bdf8; }
+.hero-subtitle {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.55);
+    max-width: 500px;
+}
+.hero-btn-primary {
+    background: linear-gradient(135deg, #38bdf8, #0284c7);
+    border: none;
+    color: #0c1f3f;
+    font-weight: 800;
+    border-radius: 12px;
+    padding: 14px 32px;
+    font-size: 0.95rem;
+    letter-spacing: 0.2px;
+    transition: all .25s ease;
+    box-shadow: 0 8px 30px rgba(56,189,248,0.35);
+}
+.hero-btn-primary:hover {
+    background: linear-gradient(135deg, #7dd3fc, #38bdf8);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 40px rgba(56,189,248,0.45);
+    color: #0a1628;
+}
+.hero-btn-secondary {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.85);
+    font-weight: 600;
+    border-radius: 12px;
+    padding: 14px 28px;
+    font-size: 0.95rem;
+    transition: all .25s ease;
+}
+.hero-btn-secondary:hover {
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.3);
+    color: #fff;
+    transform: translateY(-2px);
+}
+/* Floating stat cards */
+.hero-stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.hero-stat-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 16px;
+    padding: 1.25rem;
+    backdrop-filter: blur(10px);
+    transition: all .25s ease;
+}
+.hero-stat-card:hover {
+    background: rgba(255,255,255,0.08);
+    transform: translateY(-3px);
+    border-color: rgba(56,189,248,0.3);
+}
+.hero-stat-icon {
+    width: 42px; height: 42px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; margin-bottom: 10px;
+}
+.hero-stat-value { font-size: 1.5rem; font-weight: 900; color: #ffffff; line-height: 1; margin-bottom: 2px; }
+.hero-stat-label { font-size: 0.72rem; color: rgba(255,255,255,0.45); font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
 
-    .hover-lift-clean {
-        transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
+/* Trust bar */
+.trust-bar { background: rgba(255,255,255,0.03); border-top: 1px solid rgba(255,255,255,0.07); border-bottom: 1px solid rgba(255,255,255,0.07); }
+.trust-item { display: flex; flex-direction: column; align-items: center; padding: 1.25rem 0; }
+.trust-item h4 { font-size: 1.7rem; font-weight: 900; color: #fff; margin: 0; }
+.trust-item span { font-size: .72rem; color: rgba(255,255,255,.45); font-weight: 600; text-transform: uppercase; letter-spacing: .07em; margin-top: 2px; }
+.trust-divider { border-right: 1px solid rgba(255,255,255,.08); }
 
-        .hover-lift-clean:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 1rem 3rem rgba(12, 56, 122, 0.08) !important;
-        }
+/* Light sections */
+.light-section { background: #ffffff; }
+.light-section-alt { background: #f8fafc; }
+.section-eyebrow {
+    font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em;
+    text-transform: uppercase; color: #0c387a;
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-bottom: 0.75rem;
+}
+.section-eyebrow::before {
+    content: ''; width: 24px; height: 2px;
+    background: #38bdf8; border-radius: 2px; display: inline-block;
+}
+.section-title { font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: 900; letter-spacing: -1px; color: #0f172a; }
 
-    html {
-        scroll-behavior: smooth;
-    }
+/* Feature cards */
+.feat-card {
+    background: #fff;
+    border: 1px solid #e8eef5;
+    border-radius: 18px;
+    padding: 2rem;
+    transition: all .25s ease;
+    height: 100%;
+}
+.feat-card:hover { transform: translateY(-5px); box-shadow: 0 16px 48px rgba(12,56,122,0.1); border-color: #c7d9f0; }
+.feat-icon {
+    width: 52px; height: 52px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.25rem; margin-bottom: 1.2rem;
+}
+
+/* Process steps */
+.process-card {
+    border-radius: 18px;
+    padding: 2rem;
+    height: 100%;
+    border: 1px solid #e8eef5;
+    background: #f8fafc;
+    position: relative;
+    overflow: hidden;
+    transition: all .25s ease;
+}
+.process-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(12,56,122,.08); }
+.process-num {
+    font-size: 4rem; font-weight: 900; line-height: 1;
+    color: #e2e8f0; position: absolute;
+    top: 1rem; right: 1.25rem;
+    transition: color .3s;
+}
+.process-card:hover .process-num { color: #bfdbfe; }
+.process-card.step-final { background: linear-gradient(135deg, #ecfdf5, #d1fae5); border-color: #a7f3d0; }
+.process-card.step-final .process-num { color: #bbf7d0; }
+
+/* FAQ */
+.faq-accordion .accordion-button {
+    font-weight: 700; font-size: 0.95rem; background: #fff; color: #0f172a;
+    padding: 1.25rem 1.5rem; border-radius: 0 !important; box-shadow: none !important;
+}
+.faq-accordion .accordion-button:not(.collapsed) { color: #0c387a; background: #f0f6ff; }
+.faq-accordion .accordion-body { background: #fff; color: #64748b; font-size: .9rem; padding: 0 1.5rem 1.5rem; }
+.faq-accordion .accordion-item { border: none; border-bottom: 1px solid #e8eef5; }
+
+/* CTA strip */
+.cta-strip {
+    background: linear-gradient(135deg, #0c387a, #1a56c4);
+    border-radius: 20px;
+    padding: 3rem;
+}
+
+/* Contact pills */
+.contact-pill {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #fff; border: 1px solid #e2e8f0;
+    border-radius: 50px; padding: 10px 22px;
+    font-weight: 700; color: #0f172a; font-size: .9rem;
+    text-decoration: none; transition: all .22s ease;
+}
+.contact-pill:hover { border-color: #0c387a; box-shadow: 0 4px 16px rgba(12,56,122,.1); transform: translateY(-2px); color: #0c387a; }
 </style>
 
-<!-- 1. AIRY LIGHT HERO SECTION -->
-<section class="position-relative overflow-hidden light-hero-bg py-5" id="home" style="padding-top: 100px !important; padding-bottom: 120px !important;">
-    <div class="container position-relative z-index-1 py-4">
+<!-- ════════════════════════════════════════════════
+     HERO SECTION — DARK PREMIUM
+═════════════════════════════════════════════════ -->
+<section class="hero-section" id="home">
+    <div class="container position-relative" style="z-index:2;">
         <div class="row align-items-center g-5">
+
+            <!-- Left: Copy -->
             <div class="col-lg-6">
-                <!-- Badge -->
-                <div class="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-white shadow-sm border border-light mb-4">
-                    <span class="badge bg-primary rounded-pill px-2 py-1">NEW</span>
-                    <span class="text-dark fw-bold small">India's #1 Digital Vehicle Insurance Portal</span>
+                <div class="hero-badge">
+                    <div class="hero-badge-dot">★</div>
+                    <span style="color:rgba(255,255,255,.7); font-size:.82rem; font-weight:600;">India's #1 Digital Vehicle Insurance</span>
                 </div>
 
-                <h1 class="display-4 fw-bolder text-dark mb-4" style="letter-spacing: -1.5px; line-height: 1.15;">
-                    Drive with Confidence.<br>
-                    <span style="color: #0c387a;">Claim with Ease.</span>
+                <h1 class="hero-title mb-4">
+                    Drive with<br>
+                    Confidence.<br>
+                    <span>Claim with Ease.</span>
                 </h1>
 
-                <p class="lead text-muted mb-5 fw-normal" style="font-size: 1.1rem; line-height: 1.7;">
-                    Experience lightning-fast claim settlements, transparent pricing, and instant policy issuance backed by 19 years of industry trust.
+                <p class="hero-subtitle mb-5">
+                    Lightning-fast claim settlements, transparent pricing, and instant policy issuance backed by 19 years of industry trust.
                 </p>
 
-                <!-- Action Buttons -->
-                <div class="d-flex flex-wrap align-items-center gap-3">
-                    <a href="/Auth/Login" class="btn btn-lg fw-bold shadow-sm rounded-3 px-4 py-3 text-white transition-all" style="background-color: #0c387a;">
-                        <i class="fa-solid fa-shield-halved me-2 text-info"></i> Buy Policy Now
+                <div class="d-flex flex-wrap gap-3 mb-5">
+                    <a href="/Auth/Login" class="btn hero-btn-primary">
+                        <i class="fa-solid fa-shield-halved me-2"></i> Buy Policy Now
                     </a>
-                    <a href="/Auth/Login" class="btn btn-outline-dark btn-lg fw-bold rounded-3 px-4 py-3 bg-white shadow-sm">
+                    <a href="/Auth/Login" class="btn hero-btn-secondary">
                         <i class="fa-solid fa-right-to-bracket me-2"></i> Customer Login
                     </a>
-                    <a href="/Auth/StaffLogin" class="btn btn-link fw-semibold text-decoration-none text-muted ms-2">
-                        <i class="fa-solid fa-user-tie me-1"></i> Staff Portal
+                </div>
+
+                <div class="d-flex align-items-center gap-3">
+                    <a href="/Auth/StaffLogin" style="color:rgba(255,255,255,.4); font-size:.85rem; font-weight:600; text-decoration:none; transition: color .2s;"
+                       onmouseover="this.style.color='rgba(255,255,255,.8)'" onmouseout="this.style.color='rgba(255,255,255,.4)'">
+                        <i class="fa-solid fa-user-tie me-1"></i> Staff Portal →
                     </a>
+                    <span style="color:rgba(255,255,255,.15);">|</span>
+                    <div class="d-flex align-items-center gap-1">
+                        @for (int i = 0; i < 5; i++) {
+                            <i class="fa-solid fa-star" style="color:#fbbf24; font-size:.7rem;"></i>
+                        }
+                        <span style="color:rgba(255,255,255,.4); font-size:.78rem; font-weight:600; margin-left:4px;">4.9/5 (12k reviews)</span>
+                    </div>
                 </div>
             </div>
 
-            <!-- Right Visual Graphic / Stats preview -->
+            <!-- Right: Stat cards grid -->
             <div class="col-lg-6 d-none d-lg-block">
-                <div class="row g-3">
-                    <div class="col-6">
-                        <div class="card border-0 shadow-sm rounded-4 p-4 bg-white text-center mb-3 hover-lift-clean">
-                            <div class="rounded-circle bg-primary bg-opacity-10 text-primary mx-auto d-flex align-items-center justify-content-center mb-3" style="width: 50px; height: 50px;">
-                                <i class="fa-solid fa-bolt fs-5"></i>
-                            </div>
-                            <h4 class="fw-bolder text-dark mb-1">Instant</h4>
-                            <span class="text-muted small">Policy Issuance</span>
+                <div class="hero-stat-grid">
+                    <div class="hero-stat-card">
+                        <div class="hero-stat-icon" style="background:rgba(56,189,248,.15);">
+                            <i class="fa-solid fa-bolt" style="color:#38bdf8;"></i>
                         </div>
-                        <div class="card border-0 shadow-sm rounded-4 p-4 bg-white text-center hover-lift-clean">
-                            <div class="rounded-circle bg-success bg-opacity-10 text-success mx-auto d-flex align-items-center justify-content-center mb-3" style="width: 50px; height: 50px;">
-                                <i class="fa-solid fa-clock-rotate-left fs-5"></i>
-                            </div>
-                            <h4 class="fw-bolder text-dark mb-1">48 Hours</h4>
-                            <span class="text-muted small">Avg Settlement</span>
-                        </div>
+                        <div class="hero-stat-value">Instant</div>
+                        <div class="hero-stat-label">Policy Issuance</div>
                     </div>
-                    <div class="col-6 pt-4">
-                        <div class="card border-0 shadow-sm rounded-4 p-4 bg-white text-center mb-3 hover-lift-clean">
-                            <div class="rounded-circle bg-warning bg-opacity-10 text-warning mx-auto d-flex align-items-center justify-content-center mb-3" style="width: 50px; height: 50px;">
-                                <i class="fa-solid fa-users fs-5"></i>
-                            </div>
-                            <h4 class="fw-bolder text-dark mb-1">150K+</h4>
-                            <span class="text-muted small">Active Drivers</span>
+                    <div class="hero-stat-card">
+                        <div class="hero-stat-icon" style="background:rgba(16,185,129,.15);">
+                            <i class="fa-solid fa-clock-rotate-left" style="color:#10b981;"></i>
                         </div>
-                        <div class="card border-0 shadow-sm rounded-4 p-4 bg-white text-center hover-lift-clean">
-                            <div class="rounded-circle bg-info bg-opacity-10 text-info mx-auto d-flex align-items-center justify-content-center mb-3" style="width: 50px; height: 50px;">
-                                <i class="fa-solid fa-award fs-5"></i>
-                            </div>
-                            <h4 class="fw-bolder text-dark mb-1">98.2%</h4>
-                            <span class="text-muted small">Claim Ratio</span>
+                        <div class="hero-stat-value">48 hrs</div>
+                        <div class="hero-stat-label">Avg. Settlement</div>
+                    </div>
+                    <div class="hero-stat-card">
+                        <div class="hero-stat-icon" style="background:rgba(245,158,11,.15);">
+                            <i class="fa-solid fa-users" style="color:#f59e0b;"></i>
                         </div>
+                        <div class="hero-stat-value">150K+</div>
+                        <div class="hero-stat-label">Active Drivers</div>
+                    </div>
+                    <div class="hero-stat-card">
+                        <div class="hero-stat-icon" style="background:rgba(167,139,250,.15);">
+                            <i class="fa-solid fa-award" style="color:#a78bfa;"></i>
+                        </div>
+                        <div class="hero-stat-value">98.2%</div>
+                        <div class="hero-stat-label">Claim Ratio</div>
                     </div>
                 </div>
+
+                <!-- Shield visual -->
+                <div class="mt-4 p-4 rounded-4 text-center" style="background:rgba(56,189,248,.06); border:1px solid rgba(56,189,248,.12);">
+                    <i class="fa-solid fa-shield-halved" style="font-size:3.5rem; color:#38bdf8; opacity:.7;"></i>
+                    <p class="mb-0 mt-2" style="color:rgba(255,255,255,.35); font-size:.78rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase;">
+                        256-bit SSL Encrypted &nbsp;•&nbsp; IRDAI Certified
+                    </p>
+                </div>
             </div>
+
         </div>
     </div>
 </section>
 
-<!-- 2. CLEAN STATS BAR -->
-<div class="bg-white border-bottom py-4 shadow-sm">
+<!-- ════════════════════════════════════════════════
+     TRUST BAR — stays dark
+═════════════════════════════════════════════════ -->
+<div class="trust-bar" style="background:#060e1e;">
     <div class="container">
-        <div class="row text-center g-4">
-            <div class="col-md-3 col-6 border-end-md">
-                <h3 class="fw-bolder text-dark mb-0">150,247+</h3>
-                <span class="text-muted small fw-semibold text-uppercase">Protected Vehicles</span>
+        <div class="row text-center g-0">
+            <div class="col-6 col-md-3 trust-divider">
+                <div class="trust-item">
+                    <h4>150K+</h4>
+                    <span>Protected Vehicles</span>
+                </div>
             </div>
-            <div class="col-md-3 col-6 border-end-md">
-                <h3 class="fw-bolder text-success mb-0">98.2%</h3>
-                <span class="text-muted small fw-semibold text-uppercase">Claims Settled</span>
+            <div class="col-6 col-md-3 trust-divider">
+                <div class="trust-item">
+                    <h4 style="color:#10b981;">98.2%</h4>
+                    <span>Claims Settled</span>
+                </div>
             </div>
-            <div class="col-md-3 col-6 border-end-md">
-                <h3 class="fw-bolder text-primary mb-0">Rs. 2.3B</h3>
-                <span class="text-muted small fw-semibold text-uppercase">Payouts Processed</span>
+            <div class="col-6 col-md-3 trust-divider">
+                <div class="trust-item">
+                    <h4 style="color:#38bdf8;">₹2.3B</h4>
+                    <span>Payouts Processed</span>
+                </div>
             </div>
-            <div class="col-md-3 col-6">
-                <h3 class="fw-bolder text-warning mb-0">500+</h3>
-                <span class="text-muted small fw-semibold text-uppercase">Repair Partners</span>
+            <div class="col-6 col-md-3">
+                <div class="trust-item">
+                    <h4 style="color:#fbbf24;">500+</h4>
+                    <span>Repair Partners</span>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- 3. WHY CHOOSE US (FEATURES) -->
-<section class="py-5 bg-light" id="features">
-    <div class="container py-5">
-        <div class="text-center max-w-2xl mx-auto mb-5">
-            <span class="text-primary fw-bold text-uppercase small tracking-wide mb-2 d-block">THE SHIELDINSURE ADVANTAGE</span>
-            <h2 class="display-6 fw-bolder text-dark">The Smarter Way to Stay Protected</h2>
-            <p class="text-muted">We deliver complete peace of mind through a streamlined, transparent digital process.</p>
+<!-- ════════════════════════════════════════════════
+     FEATURES — light
+═════════════════════════════════════════════════ -->
+<section class="light-section-alt py-5" id="features" style="padding-top:6rem!important;padding-bottom:6rem!important;">
+    <div class="container">
+        <div class="text-center mb-5">
+            <div class="section-eyebrow justify-content-center">The ShieldInsure Advantage</div>
+            <h2 class="section-title">The Smarter Way to<br>Stay Protected</h2>
+            <p class="text-muted mt-3 mx-auto" style="max-width:480px; font-size:.95rem;">
+                Complete peace of mind through a streamlined, transparent digital process.
+            </p>
         </div>
         <div class="row g-4">
             <div class="col-lg-4 col-md-6">
-                <div class="card border-0 shadow-sm rounded-4 p-4 h-100 bg-white hover-lift-clean">
-                    <div class="rounded-3 bg-primary bg-opacity-10 text-primary d-flex align-items-center justify-content-center mb-4" style="width: 60px; height: 60px;">
-                        <i class="fa-solid fa-bolt fs-4"></i>
+                <div class="feat-card">
+                    <div class="feat-icon" style="background:#eff6ff; color:#0c387a;">
+                        <i class="fa-solid fa-bolt"></i>
                     </div>
-                    <h5 class="fw-bold text-dark mb-2">Instant Digital Policy</h5>
-                    <p class="text-muted small mb-0">Get your policy document instantly after payment. Zero paperwork, 100% online issuance.</p>
+                    <h5 class="fw-800 mb-2">Instant Digital Policy</h5>
+                    <p class="text-muted mb-0" style="font-size:.875rem; line-height:1.7;">Get your policy document instantly after payment. Zero paperwork, 100% online issuance.</p>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6">
-                <div class="card border-0 shadow-sm rounded-4 p-4 h-100 bg-white hover-lift-clean">
-                    <div class="rounded-3 bg-success bg-opacity-10 text-success d-flex align-items-center justify-content-center mb-4" style="width: 60px; height: 60px;">
-                        <i class="fa-solid fa-clock-rotate-left fs-4"></i>
+                <div class="feat-card">
+                    <div class="feat-icon" style="background:#ecfdf5; color:#059669;">
+                        <i class="fa-solid fa-clock-rotate-left"></i>
                     </div>
-                    <h5 class="fw-bold text-dark mb-2">48-Hour Settlement</h5>
-                    <p class="text-muted small mb-0">Our automated surveyor dispatch and compliance review ensures fast, hassle-free payouts.</p>
+                    <h5 class="fw-800 mb-2">48-Hour Settlement</h5>
+                    <p class="text-muted mb-0" style="font-size:.875rem; line-height:1.7;">Our automated surveyor dispatch and compliance review ensures fast, hassle-free payouts.</p>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6">
-                <div class="card border-0 shadow-sm rounded-4 p-4 h-100 bg-white hover-lift-clean">
-                    <div class="rounded-3 bg-warning bg-opacity-10 text-warning d-flex align-items-center justify-content-center mb-4" style="width: 60px; height: 60px;">
-                        <i class="fa-solid fa-shield-halved fs-4"></i>
+                <div class="feat-card">
+                    <div class="feat-icon" style="background:#fffbeb; color:#d97706;">
+                        <i class="fa-solid fa-shield-halved"></i>
                     </div>
-                    <h5 class="fw-bold text-dark mb-2">Smart Fraud Protection</h5>
-                    <p class="text-muted small mb-0">AI-driven fraud detection keeps our network secure, ensuring genuine claims are prioritized.</p>
+                    <h5 class="fw-800 mb-2">Smart Fraud Protection</h5>
+                    <p class="text-muted mb-0" style="font-size:.875rem; line-height:1.7;">AI-driven fraud detection keeps our network secure, ensuring genuine claims are prioritized.</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- 4. HOW IT WORKS (CLAIMS PROCESS) -->
-<section class="py-5 bg-white" id="how-it-works">
-    <div class="container py-5">
-        <div class="text-center max-w-2xl mx-auto mb-5">
-            <span class="text-primary fw-bold text-uppercase small tracking-wide mb-2 d-block">TRANSPARENT WORKFLOW</span>
-            <h2 class="display-6 fw-bolder text-dark">Simple 3-Step Claim Process</h2>
-            <p class="text-muted">Track your claim at every single stage from your customer portal.</p>
+<!-- ════════════════════════════════════════════════
+     HOW IT WORKS
+═════════════════════════════════════════════════ -->
+<section class="light-section py-5" id="how-it-works" style="padding-top:6rem!important;padding-bottom:6rem!important;">
+    <div class="container">
+        <div class="text-center mb-5">
+            <div class="section-eyebrow justify-content-center">Transparent Workflow</div>
+            <h2 class="section-title">Simple 3-Step Claim Process</h2>
+            <p class="text-muted mt-3" style="font-size:.95rem;">Track your claim at every single stage from your customer portal.</p>
         </div>
         <div class="row g-4">
             <div class="col-lg-4">
-                <div class="card border-0 bg-light rounded-4 p-4 h-100">
-                    <div class="text-primary fw-bolder fs-1 mb-2">01</div>
-                    <h5 class="fw-bold text-dark mb-2">Register Claim</h5>
-                    <p class="text-muted small mb-0">Log in to your customer dashboard and submit your incident report along with damage photos.</p>
+                <div class="process-card">
+                    <div class="process-num">01</div>
+                    <div class="feat-icon mb-3" style="background:#eff6ff; color:#0c387a;">
+                        <i class="fa-solid fa-file-pen"></i>
+                    </div>
+                    <h5 class="fw-800 mb-2">Register Claim</h5>
+                    <p class="text-muted mb-0" style="font-size:.875rem; line-height:1.7;">Log in to your customer dashboard and submit your incident report along with damage photos.</p>
                 </div>
             </div>
             <div class="col-lg-4">
-                <div class="card border-0 bg-light rounded-4 p-4 h-100">
-                    <div class="text-primary fw-bolder fs-1 mb-2">02</div>
-                    <h5 class="fw-bold text-dark mb-2">Field Inspection</h5>
-                    <p class="text-muted small mb-0">A certified survey officer inspects your vehicle and submits a verified damage report.</p>
+                <div class="process-card">
+                    <div class="process-num">02</div>
+                    <div class="feat-icon mb-3" style="background:#fff7ed; color:#ea580c;">
+                        <i class="fa-solid fa-magnifying-glass-location"></i>
+                    </div>
+                    <h5 class="fw-800 mb-2">Field Inspection</h5>
+                    <p class="text-muted mb-0" style="font-size:.875rem; line-height:1.7;">A certified survey officer inspects your vehicle and submits a verified damage report.</p>
                 </div>
             </div>
             <div class="col-lg-4">
-                <div class="card border-0 bg-light rounded-4 p-4 h-100">
-                    <div class="text-success fw-bolder fs-1 mb-2">03</div>
-                    <h5 class="fw-bold text-dark mb-2">Automated Payout</h5>
-                    <p class="text-muted small mb-0">Once cleared by compliance and approved, funds are transferred directly to your bank account.</p>
+                <div class="process-card step-final">
+                    <div class="process-num">03</div>
+                    <div class="feat-icon mb-3" style="background:rgba(16,185,129,.15); color:#059669;">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+                    <h5 class="fw-800 mb-2">Automated Payout</h5>
+                    <p class="text-muted mb-0" style="font-size:.875rem; line-height:1.7;">Once cleared by compliance and approved, funds are transferred directly to your bank account.</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- 5. FAQ SECTION -->
-<section class="py-5 bg-light" id="faq">
-    <div class="container py-5">
-        <div class="text-center max-w-2xl mx-auto mb-5">
-            <span class="text-primary fw-bold text-uppercase small tracking-wide mb-2 d-block">HELP & SUPPORT</span>
-            <h2 class="display-6 fw-bolder text-dark">Frequently Asked Questions</h2>
+<!-- ════════════════════════════════════════════════
+     FAQ
+═════════════════════════════════════════════════ -->
+<section class="light-section-alt py-5" id="faq" style="padding-top:6rem!important;padding-bottom:6rem!important;">
+    <div class="container">
+        <div class="text-center mb-5">
+            <div class="section-eyebrow justify-content-center">Help &amp; Support</div>
+            <h2 class="section-title">Frequently Asked Questions</h2>
         </div>
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                <div class="accordion shadow-sm rounded-4 overflow-hidden" id="faqAccordion">
-                    <div class="accordion-item border-0 border-bottom">
+                <div class="accordion faq-accordion shadow-sm rounded-4 overflow-hidden" id="faqAccordion">
+                    <div class="accordion-item">
                         <h2 class="accordion-header">
-                            <button class="accordion-button fw-bold py-4 bg-white text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
                                 How long does it take to process a claim?
                             </button>
                         </h2>
                         <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body text-muted bg-white pb-4">
+                            <div class="accordion-body">
                                 Most claims are processed and settled within 48 to 72 hours from the date of document submission.
                             </div>
                         </div>
                     </div>
-                    <div class="accordion-item border-0 border-bottom">
+                    <div class="accordion-item">
                         <h2 class="accordion-header">
-                            <button class="accordion-button collapsed fw-bold py-4 bg-white text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
                                 What documents are required to file a claim?
                             </button>
                         </h2>
                         <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body text-muted bg-white pb-4">
-                                You need: Policy Document, Vehicle Registration Certificate, Driving License, FIR (for theft/third-party), and clear photos of the damage.
+                            <div class="accordion-body">
+                                You need: Policy Document, Vehicle RC, Driving License, FIR (for theft/third-party), and clear photos of the damage.
                             </div>
                         </div>
                     </div>
-                    <div class="accordion-item border-0">
+                    <div class="accordion-item" style="border-bottom:none;">
                         <h2 class="accordion-header">
-                            <button class="accordion-button collapsed fw-bold py-4 bg-white text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
                                 Can I track my claim status online?
                             </button>
                         </h2>
                         <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body text-muted bg-white pb-4">
-                                Yes. Once logged into your customer portal, navigate to your Dashboard to see real-time updates at every stage of the workflow.
+                            <div class="accordion-body">
+                                Yes. Once logged in, navigate to your Dashboard to see real-time updates at every stage of the workflow.
                             </div>
                         </div>
                     </div>
@@ -247,18 +466,23 @@
     </div>
 </section>
 
-<!-- 6. CONTACT STRIP -->
-<section class="py-5 bg-white border-top" id="contact">
-    <div class="container py-4 text-center">
-        <h3 class="fw-bolder text-dark mb-3">Need immediate assistance?</h3>
-        <p class="text-muted mb-4">Our emergency support team is available 24/7 to help you on the road.</p>
-        <div class="d-flex justify-content-center gap-3 flex-wrap">
-            <a href="tel:180020012345" class="btn btn-outline-dark fw-bold px-4 py-2 rounded-pill">
-                <i class="fa-solid fa-phone text-primary me-2"></i> 1800-200-12345
-            </a>
-            <a href="mailto:claims@shieldinsure.com" class="btn btn-outline-dark fw-bold px-4 py-2 rounded-pill">
-                <i class="fa-solid fa-envelope text-primary me-2"></i> claims@shieldinsure.com
-            </a>
+<!-- ════════════════════════════════════════════════
+     CONTACT / CTA
+═════════════════════════════════════════════════ -->
+<section class="light-section py-5" id="contact" style="padding-top:5rem!important;padding-bottom:5rem!important;">
+    <div class="container">
+        <div class="cta-strip text-center text-white">
+            <div class="mb-2" style="opacity:.6; font-size:.75rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase;">24/7 Emergency Support</div>
+            <h2 class="fw-900 mb-2" style="font-size:clamp(1.5rem,3vw,2rem); letter-spacing:-.5px;">Need immediate assistance?</h2>
+            <p class="mb-4" style="color:rgba(255,255,255,.6); font-size:.95rem;">Our emergency support team is always on standby to help you on the road.</p>
+            <div class="d-flex justify-content-center gap-3 flex-wrap">
+                <a href="tel:180020012345" class="contact-pill">
+                    <i class="fa-solid fa-phone" style="color:#0c387a;"></i> 1800-200-12345
+                </a>
+                <a href="mailto:claims@shieldinsure.com" class="contact-pill">
+                    <i class="fa-solid fa-envelope" style="color:#0c387a;"></i> claims@shieldinsure.com
+                </a>
+            </div>
         </div>
     </div>
 </section>

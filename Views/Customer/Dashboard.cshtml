@@ -1,232 +1,245 @@
 ﻿@model IEnumerable<Final_Insure.Models.Claim>
 @using Final_Insure.Models
-
 @{
     ViewData["Title"] = "My Dashboard";
-    var myPolicies = ViewBag.Policies as IEnumerable<Policy>;
+    var myPolicies    = ViewBag.Policies as IEnumerable<Policy>;
     var settledClaims = Model?.Where(c => c.ClaimStatus == ClaimStatus.Settled).ToList();
-    var assessments = ViewBag.Assessments as List<Final_Insure.Models.Assessment> ?? new List<Final_Insure.Models.Assessment>();
+    var assessments   = ViewBag.Assessments as List<Final_Insure.Models.Assessment> ?? new List<Final_Insure.Models.Assessment>();
 }
 
-<div class="py-5" style="background-color: #f8fafc; min-height: 90vh;">
-    <div class="container">
+<style>
+.cust-stat {
+    border-radius: 16px; border: 1px solid #e8eef5;
+    background: #fff; padding: 1.4rem 1.6rem;
+    display: flex; align-items: center; gap: 1rem;
+    transition: all .22s ease; box-shadow: 0 1px 6px rgba(0,0,0,.04);
+}
+.cust-stat:hover { box-shadow: 0 8px 28px rgba(12,56,122,.10); transform: translateY(-3px); }
+.cust-stat-icon { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
+.cust-stat-label { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #64748b; margin-bottom: 3px; }
+.cust-stat-value { font-size: 2rem; font-weight: 900; line-height: 1; color: #0f172a; }
 
-        <!-- Top Welcome Header -->
-        <div class="row align-items-center mb-5 pb-3 border-bottom g-3">
-            <div class="col-lg-8">
-                <span class="badge bg-primary bg-opacity-10 text-primary border border-primary border-opacity-25 rounded-pill px-3 py-1 mb-2 fw-bold small">CLIENT PORTAL</span>
-                <h1 class="fw-bolder text-dark mb-1" style="letter-spacing: -0.5px;">Command Center</h1>
-                <p class="text-secondary mb-0">Monitor your active vehicle insurance policies and live claim statuses seamlessly.</p>
-            </div>
-            <div class="col-lg-4 text-lg-end">
-                <div class="d-inline-flex gap-2 flex-wrap">
-                    <a asp-action="BuyPolicy" class="btn fw-bold shadow-sm rounded-3 px-3 py-2 text-white" style="background-color: #0c387a;">
-                        <i class="bi bi-shield-plus me-1"></i> New Policy
-                    </a>
-                    <a asp-action="FileClaim" class="btn fw-bold shadow-sm rounded-3 px-3 py-2 bg-white text-danger border border-danger border-opacity-25">
-                        <i class="bi bi-file-earmark-medical me-1"></i> File Claim
-                    </a>
-                </div>
-            </div>
-        </div>
+.data-card { border-radius: 16px; border: 1px solid #e8eef5; background: #fff; overflow: hidden; margin-bottom: 1.4rem; box-shadow: 0 1px 6px rgba(0,0,0,.04); }
+.data-card-hdr { display: flex; align-items: center; justify-content: space-between; padding: .9rem 1.25rem; border-bottom: 1px solid #f1f5f9; }
+.data-card-title { font-size: .875rem; font-weight: 700; display: flex; align-items: center; gap: 8px; margin: 0; }
+.data-card-icon { width: 30px; height: 30px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: .85rem; flex-shrink: 0; }
+</style>
 
-        <!-- Quick Metrics Overview Row -->
-        <div class="row g-4 mb-5">
-            <div class="col-md-4">
-                <div class="card border-0 shadow-sm rounded-4 p-4 bg-white h-100">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <div>
-                            <span class="text-muted small fw-bold text-uppercase tracking-wide">Active Policies</span>
-                            <h2 class="fw-bolder text-dark mb-0 mt-1">@(myPolicies?.Count() ?? 0)</h2>
-                        </div>
-                        <div class="rounded-3 bg-primary bg-opacity-10 text-primary d-flex align-items-center justify-content-center" style="width: 52px; height: 52px;">
-                            <i class="bi bi-shield-check fs-4"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card border-0 shadow-sm rounded-4 p-4 bg-white h-100">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <div>
-                            <span class="text-muted small fw-bold text-uppercase tracking-wide">Total Claims</span>
-                            <h2 class="fw-bolder text-dark mb-0 mt-1">@(Model?.Count() ?? 0)</h2>
-                        </div>
-                        <div class="rounded-3 bg-warning bg-opacity-10 text-warning d-flex align-items-center justify-content-center" style="width: 52px; height: 52px;">
-                            <i class="bi bi-folder2-open fs-4"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card border-0 shadow-sm rounded-4 p-4 bg-white h-100">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <div>
-                            <span class="text-muted small fw-bold text-uppercase tracking-wide">Settled Payouts</span>
-                            <h2 class="fw-bolder text-success mb-0 mt-1">@(settledClaims?.Count() ?? 0)</h2>
-                        </div>
-                        <div class="rounded-3 bg-success bg-opacity-10 text-success d-flex align-items-center justify-content-center" style="width: 52px; height: 52px;">
-                            <i class="bi bi-cash-coin fs-4"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- SECTION 1: MY POLICIES -->
-        <div class="card border-0 shadow-sm rounded-4 mb-5 bg-white overflow-hidden">
-            <div class="card-header bg-white py-3 px-4 border-bottom d-flex align-items-center justify-content-between">
-                <h5 class="fw-bold text-dark mb-0"><i class="bi bi-shield-check text-primary me-2"></i> My Active Policies</h5>
-                <span class="badge bg-primary bg-opacity-10 text-primary border border-primary border-opacity-25 rounded-pill px-3 py-1">Protected</span>
-            </div>
-            <div class="card-body p-0">
-                @if (myPolicies != null && myPolicies.Any())
-                {
-                    <div class="table-responsive">
-                        <table class="table table-hover align-middle mb-0">
-                            <thead class="bg-light text-muted small text-uppercase">
-                                <tr>
-                                    <th class="ps-4 py-3">Policy Number</th>
-                                    <th>Type</th>
-                                    <th>Coverage</th>
-                                    <th>Premium</th>
-                                    <th>Status</th>
-                                    <th class="text-end pe-4">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var policy in myPolicies)
-                                {
-                                    <tr>
-                                        <td class="ps-4 fw-bold text-primary font-monospace">@policy.PolicyNumber</td>
-                                        <td class="fw-semibold text-dark">@policy.PolicyType</td>
-                                        <td>$@policy.CoverageAmount.ToString("N0")</td>
-                                        <td>$@policy.PremiumAmount.ToString("0.00") <span class="text-muted small">/mo</span></td>
-                                        <td>
-                                            <span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25 px-3 py-1 rounded-pill fw-semibold">Active</span>
-                                        </td>
-                                        <td class="text-end pe-4">
-                                            <a asp-action="ViewPolicy" asp-route-id="@policy.PolicyId" class="btn btn-sm btn-outline-primary fw-semibold px-3 rounded-pill shadow-sm">View Details</a>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                }
-                else
-                {
-                    <div class="p-5 text-center text-muted">
-                        <i class="bi bi-shield-exclamation fs-1 mb-3 text-secondary d-block"></i>
-                        <h6 class="fw-bold text-dark">No Active Policies</h6>
-                        <p class="small mb-0">You don't have any active policies right now. Protect your vehicle today.</p>
-                    </div>
-                }
-            </div>
-        </div>
-
-        <!-- SECTION 2: MY CLAIMS -->
-        <div class="card border-0 shadow-sm rounded-4 mb-5 bg-white overflow-hidden">
-            <div class="card-header bg-white py-3 px-4 border-bottom d-flex align-items-center justify-content-between">
-                <h5 class="fw-bold text-dark mb-0"><i class="bi bi-folder2-open text-dark me-2"></i> My Claim History</h5>
-                <span class="badge bg-info bg-opacity-10 text-info border border-info border-opacity-25 rounded-pill px-3 py-1">History</span>
-            </div>
-            <div class="card-body p-0">
-                @if (Model != null && Model.Any())
-                {
-                    <div class="table-responsive">
-                        <table class="table table-hover align-middle mb-0">
-                            <thead class="bg-light text-muted small text-uppercase">
-                                <tr>
-                                    <th class="ps-4 py-3">Claim ID</th>
-                                    <th>Date</th>
-                                    <th>Type</th>
-                                    <th>Amount</th>
-                                    <th>Status</th>
-                                    <th class="text-end pe-4">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var claim in Model.OrderByDescending(c => c.SubmittedAt))
-                                {
-                                    <tr>
-                                        <td class="ps-4 fw-bold text-dark font-monospace">#CLM-@claim.ClaimId.ToString("D4")</td>
-                                        <td>@claim.IncidentDate.ToString("MMM dd, yyyy")</td>
-                                        <td class="fw-semibold text-dark">@claim.ClaimType</td>
-                                        <td class="fw-bold text-dark">$@claim.ClaimAmount.ToString("N0")</td>
-                                        <td>
-                                            <span class="badge bg-info bg-opacity-10 text-info border border-info border-opacity-25 px-3 py-1 rounded-pill fw-semibold">@claim.ClaimStatus</span>
-                                        </td>
-                                        <td class="text-end pe-4">
-                                            <a asp-action="ViewClaim" asp-route-id="@claim.ClaimId" class="btn btn-sm btn-outline-dark fw-semibold px-3 rounded-pill shadow-sm">View Claim</a>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                }
-                else
-                {
-                    <div class="p-5 text-center text-muted">
-                        <i class="bi bi-file-earmark-text fs-1 mb-3 text-secondary d-block"></i>
-                        <h6 class="fw-bold text-dark">No Claims Filed</h6>
-                        <p class="small mb-0">You have not filed any claims yet.</p>
-                    </div>
-                }
-            </div>
-        </div>
-
-        <!-- SECTION 3: SETTLEMENTS & PAYMENTS -->
-        <div class="card border-0 shadow-sm rounded-4 bg-white overflow-hidden">
-            <div class="card-header bg-white py-3 px-4 border-bottom d-flex align-items-center justify-content-between">
-                <h5 class="fw-bold text-dark mb-0"><i class="bi bi-cash-coin text-success me-2"></i> Payment & Settlement History</h5>
-                <span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25 rounded-pill px-3 py-1">Completed</span>
-            </div>
-            <div class="card-body p-0">
-                @if (settledClaims != null && settledClaims.Any())
-                {
-                    <div class="table-responsive">
-                        <table class="table table-hover align-middle mb-0">
-                            <thead class="bg-light text-muted small text-uppercase">
-                                <tr>
-                                    <th class="ps-4 py-3">Claim Reference</th>
-                                    <th>Settlement Date</th>
-                                    <th>Approved Amount</th>
-                                    <th class="text-end pe-4">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var settlement in settledClaims)
-                                {
-                                    var linkedAssessment = assessments.FirstOrDefault(a => a.ClaimId == settlement.ClaimId);
-                                    decimal finalDisplayAmount = linkedAssessment != null ? linkedAssessment.AssessedAmount : settlement.ClaimAmount;
-
-                                    <tr>
-                                        <td class="ps-4 fw-bold text-success font-monospace">#CLM-@settlement.ClaimId.ToString("D4")</td>
-                                        <td>@(settlement.IncidentDate.ToString("MMM dd, yyyy") ?? DateTime.Now.ToString("MMM dd, yyyy"))</td>
-                                        <td class="fw-bold text-success">$@finalDisplayAmount.ToString("N0")</td>
-                                        <td class="text-end pe-4">
-                                            <a asp-controller="Customer" asp-action="PaymentReceipt" asp-route-claimId="@settlement.ClaimId" class="btn btn-sm btn-success fw-semibold px-3 rounded-pill shadow-sm text-white">
-                                                <i class="bi bi-download me-1"></i> Receipt
-                                            </a>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                }
-                else
-                {
-                    <div class="p-5 text-center text-muted">
-                        <i class="bi bi-receipt fs-1 mb-3 text-secondary d-block"></i>
-                        <h5 class="fw-bold text-dark">No Payment History</h5>
-                        <p class="small mb-0">When your claims are approved and paid by the officer, the receipts will appear here.</p>
-                    </div>
-                }
-            </div>
-        </div>
-
+<!-- ── WELCOME HEADER ── -->
+<div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4 pb-3" style="border-bottom:1px solid #e8eef5;">
+    <div>
+        <span class="badge rounded-pill px-3 py-1 mb-2 fw-700 d-inline-block"
+              style="background:linear-gradient(135deg,#eff6ff,#dbeafe);color:#0c387a;border:1px solid #bfdbfe;font-size:.7rem;letter-spacing:.07em;">
+            CLIENT PORTAL
+        </span>
+        <h1 style="font-size:1.6rem;font-weight:900;letter-spacing:-.5px;margin:0;">My Insurance Hub</h1>
+        <p style="font-size:.875rem;color:#94a3b8;margin:4px 0 0;">Monitor your active policies and claim statuses in real time.</p>
     </div>
+    <div class="d-flex gap-2 flex-wrap">
+        <a asp-action="BuyPolicy"
+           style="display:inline-flex;align-items:center;gap:7px;background:linear-gradient(135deg,#0c387a,#1a56c4);color:#fff;font-weight:700;font-size:.875rem;padding:10px 20px;border-radius:10px;text-decoration:none;transition:all .2s;box-shadow:0 4px 14px rgba(12,56,122,.3);">
+            <i class="fa-solid fa-shield-plus"></i> New Policy
+        </a>
+        <a asp-action="FileClaim"
+           style="display:inline-flex;align-items:center;gap:7px;background:#fff;color:#dc2626;font-weight:700;font-size:.875rem;padding:10px 20px;border-radius:10px;text-decoration:none;border:1.5px solid #fecaca;transition:all .2s;">
+            <i class="fa-solid fa-file-medical"></i> File Claim
+        </a>
+    </div>
+</div>
+
+<!-- ── STAT CARDS ── -->
+<div class="row g-3 mb-4">
+    <div class="col-sm-4">
+        <div class="cust-stat">
+            <div class="cust-stat-icon" style="background:#eff6ff;color:#0c387a;">
+                <i class="fa-solid fa-shield-check"></i>
+            </div>
+            <div>
+                <div class="cust-stat-label">Active Policies</div>
+                <div class="cust-stat-value">@(myPolicies?.Count() ?? 0)</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="cust-stat">
+            <div class="cust-stat-icon" style="background:#fff7ed;color:#ea580c;">
+                <i class="fa-solid fa-folder-open"></i>
+            </div>
+            <div>
+                <div class="cust-stat-label">Total Claims</div>
+                <div class="cust-stat-value" style="color:#ea580c;">@(Model?.Count() ?? 0)</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="cust-stat">
+            <div class="cust-stat-icon" style="background:#ecfdf5;color:#059669;">
+                <i class="fa-solid fa-circle-dollar-to-slot"></i>
+            </div>
+            <div>
+                <div class="cust-stat-label">Settled Payouts</div>
+                <div class="cust-stat-value" style="color:#059669;">@(settledClaims?.Count() ?? 0)</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ── MY ACTIVE POLICIES ── -->
+<div class="data-card">
+    <div class="data-card-hdr">
+        <h6 class="data-card-title">
+            <div class="data-card-icon" style="background:#eff6ff;">
+                <i class="fa-solid fa-shield-check" style="color:#0c387a;font-size:.8rem;"></i>
+            </div>
+            My Active Policies
+        </h6>
+        <span class="badge rounded-pill px-3 py-1 fw-700" style="background:#eff6ff;color:#0c387a;border:1px solid #bfdbfe;font-size:.7rem;">Protected</span>
+    </div>
+    @if (myPolicies != null && myPolicies.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead><tr>
+                    <th class="ps-4">Policy Number</th><th>Type</th>
+                    <th>Coverage</th><th>Premium</th>
+                    <th>Status</th><th class="text-end pe-4">Action</th>
+                </tr></thead>
+                <tbody>
+                @foreach (var policy in myPolicies)
+                {
+                    <tr>
+                        <td class="ps-4"><span class="fw-800" style="font-family:monospace;font-size:.85rem;color:#0c387a;">@policy.PolicyNumber</span></td>
+                        <td class="fw-600">@policy.PolicyType</td>
+                        <td style="color:#059669;font-weight:700;">$@policy.CoverageAmount.ToString("N0")</td>
+                        <td>$@policy.PremiumAmount.ToString("0.00") <span style="color:#94a3b8;font-size:.78rem;">/mo</span></td>
+                        <td>
+                            <span class="badge rounded-pill px-3 py-1" style="background:#ecfdf5;color:#059669;border:1px solid #a7f3d0;font-size:.75rem;font-weight:700;">
+                                <i class="fa-solid fa-circle-dot me-1" style="font-size:.55rem;"></i>Active
+                            </span>
+                        </td>
+                        <td class="text-end pe-4">
+                            <a asp-action="ViewPolicy" asp-route-id="@policy.PolicyId"
+                               style="display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:7px;font-size:.78rem;font-weight:700;background:#f1f5f9;color:#334155;text-decoration:none;border:1px solid #e2e8f0;">
+                                View Details
+                            </a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="empty-state">
+            <i class="fa-solid fa-shield-exclamation empty-state-icon" style="color:#bfdbfe;"></i>
+            <p class="empty-state-title">No Active Policies</p>
+            <p class="empty-state-text">You don't have any active policies. Protect your vehicle today.</p>
+        </div>
+    }
+</div>
+
+<!-- ── MY CLAIM HISTORY ── -->
+<div class="data-card">
+    <div class="data-card-hdr">
+        <h6 class="data-card-title">
+            <div class="data-card-icon" style="background:#fff7ed;">
+                <i class="fa-solid fa-folder-open" style="color:#ea580c;font-size:.8rem;"></i>
+            </div>
+            My Claim History
+        </h6>
+        <span class="badge rounded-pill px-3 py-1 fw-700" style="background:#fff7ed;color:#ea580c;border:1px solid #fed7aa;font-size:.7rem;">History</span>
+    </div>
+    @if (Model != null && Model.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead><tr>
+                    <th class="ps-4">Claim ID</th><th>Date</th>
+                    <th>Type</th><th>Amount</th>
+                    <th>Status</th><th class="text-end pe-4">Action</th>
+                </tr></thead>
+                <tbody>
+                @foreach (var claim in Model.OrderByDescending(c => c.SubmittedAt))
+                {
+                    <tr>
+                        <td class="ps-4"><span class="fw-800" style="font-family:monospace;font-size:.85rem;color:#0f172a;">#CLM-@claim.ClaimId.ToString("D4")</span></td>
+                        <td style="color:#64748b;font-size:.875rem;">@claim.IncidentDate.ToString("MMM dd, yyyy")</td>
+                        <td><span class="badge rounded-pill px-2 py-1" style="background:#f1f5f9;color:#475569;font-size:.75rem;">@claim.ClaimType</span></td>
+                        <td class="fw-700">$@claim.ClaimAmount.ToString("N0")</td>
+                        <td>
+                            <span class="badge rounded-pill px-3 py-1" style="background:#eff6ff;color:#0c387a;border:1px solid #bfdbfe;font-size:.75rem;font-weight:700;">@claim.ClaimStatus</span>
+                        </td>
+                        <td class="text-end pe-4">
+                            <a asp-action="ViewClaim" asp-route-id="@claim.ClaimId"
+                               style="display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:7px;font-size:.78rem;font-weight:700;background:#f1f5f9;color:#334155;text-decoration:none;border:1px solid #e2e8f0;">
+                                View Claim
+                            </a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="empty-state">
+            <i class="fa-solid fa-file-circle-question empty-state-icon" style="color:#fed7aa;"></i>
+            <p class="empty-state-title">No Claims Filed</p>
+            <p class="empty-state-text">You have not filed any claims yet.</p>
+        </div>
+    }
+</div>
+
+<!-- ── PAYMENT & SETTLEMENT HISTORY ── -->
+<div class="data-card">
+    <div class="data-card-hdr">
+        <h6 class="data-card-title">
+            <div class="data-card-icon" style="background:#ecfdf5;">
+                <i class="fa-solid fa-circle-dollar-to-slot" style="color:#059669;font-size:.8rem;"></i>
+            </div>
+            Payment &amp; Settlement History
+        </h6>
+        <span class="badge rounded-pill px-3 py-1 fw-700" style="background:#ecfdf5;color:#059669;border:1px solid #a7f3d0;font-size:.7rem;">Completed</span>
+    </div>
+    @if (settledClaims != null && settledClaims.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead><tr>
+                    <th class="ps-4">Claim Reference</th>
+                    <th>Settlement Date</th>
+                    <th>Approved Amount</th>
+                    <th class="text-end pe-4">Action</th>
+                </tr></thead>
+                <tbody>
+                @foreach (var settlement in settledClaims)
+                {
+                    var linkedAssessment = assessments.FirstOrDefault(a => a.ClaimId == settlement.ClaimId);
+                    decimal finalDisplayAmount = linkedAssessment != null ? linkedAssessment.AssessedAmount : settlement.ClaimAmount;
+                    <tr>
+                        <td class="ps-4"><span class="fw-800" style="font-family:monospace;font-size:.85rem;color:#059669;">#CLM-@settlement.ClaimId.ToString("D4")</span></td>
+                        <td style="color:#64748b;font-size:.875rem;">@(settlement.IncidentDate.ToString("MMM dd, yyyy"))</td>
+                        <td><span class="fw-800 text-success" style="font-size:1rem;">$@finalDisplayAmount.ToString("N0")</span></td>
+                        <td class="text-end pe-4">
+                            <a asp-controller="Customer" asp-action="PaymentReceipt" asp-route-claimId="@settlement.ClaimId"
+                               style="display:inline-flex;align-items:center;gap:5px;padding:5px 14px;border-radius:7px;font-size:.78rem;font-weight:700;background:#059669;color:#fff;text-decoration:none;">
+                                <i class="fa-solid fa-download"></i> Receipt
+                            </a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="empty-state">
+            <i class="fa-solid fa-receipt empty-state-icon" style="color:#a7f3d0;"></i>
+            <p class="empty-state-title">No Payment History</p>
+            <p class="empty-state-text">When your claims are approved and paid, the receipts will appear here.</p>
+        </div>
+    }
 </div>

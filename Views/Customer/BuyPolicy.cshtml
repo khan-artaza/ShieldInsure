@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Final_Insure.Models.Policy>
+
+@{
+    ViewData["Title"] = "Insurance Catalog";
+}
+
+<div class="py-5" style="background-color: #f8fafc; min-height: 90vh;">
+    <div class="container">
+
+        <div class="text-center max-w-2xl mx-auto mb-5">
+            <span class="badge bg-primary bg-opacity-10 text-primary border border-primary border-opacity-25 rounded-pill px-3 py-1 mb-2 fw-bold small">POLICY CATALOG</span>
+            <h2 class="display-6 fw-bolder text-dark mb-2">Available Insurance Plans</h2>
+            <p class="text-muted">Browse our latest insurance offerings and protect what matters most with instant issuance.</p>
+        </div>
+
+        <div class="row g-4">
+            @if (Model != null && Model.Any())
+            {
+                foreach (var plan in Model)
+                {
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm rounded-4 bg-white hover-lift-clean overflow-hidden">
+                            <div class="card-header text-white text-center py-4 border-0" style="background: linear-gradient(135deg, #0c387a, #1856b5);">
+                                <h4 class="mb-1 fw-bold">@plan.PolicyType Insurance</h4>
+                                <span class="badge bg-white bg-opacity-20 text-white font-monospace">@plan.PolicyNumber</span>
+                            </div>
+                            <div class="card-body p-4 d-flex flex-column justify-content-between">
+                                <div class="text-center my-3">
+                                    <h2 class="fw-bolder text-success mb-1">$@plan.PremiumAmount.ToString("0.00")</h2>
+                                    <span class="text-muted small fw-semibold text-uppercase">Monthly Premium</span>
+                                </div>
+                                <hr class="text-muted opacity-25 my-3" />
+                                <ul class="list-unstyled text-start mb-4 small text-secondary">
+                                    <li class="mb-3 d-flex align-items-center">
+                                        <i class="bi bi-check-circle-fill text-success fs-5 me-2"></i>
+                                        <span><strong>Coverage Limit:</strong> $@plan.CoverageAmount.ToString("N0")</span>
+                                    </li>
+                                    <li class="mb-3 d-flex align-items-center">
+                                        <i class="bi bi-check-circle-fill text-success fs-5 me-2"></i>
+                                        <span><strong>Plan Status:</strong> Active & Ready</span>
+                                    </li>
+                                    <li class="d-flex align-items-center">
+                                        <i class="bi bi-check-circle-fill text-success fs-5 me-2"></i>
+                                        <span>Instant Digital Approval & Policy Document</span>
+                                    </li>
+                                </ul>
+                                <a asp-action="Checkout" asp-route-planId="@plan.PolicyId" class="btn fw-bold w-100 py-3 rounded-3 text-white shadow-sm transition-all" style="background-color: #0c387a;">
+                                    Buy Now <i class="bi bi-arrow-right ms-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="col-12 text-center py-5">
+                    <div class="card border-0 shadow-sm rounded-4 p-5 bg-white">
+                        <i class="bi bi-inbox fs-1 text-secondary mb-3 d-block"></i>
+                        <h4 class="fw-bold text-dark">No policies are currently available.</h4>
+                        <p class="text-muted mb-0">Please check back later or contact support assistance.</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    .hover-lift-clean {
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+        .hover-lift-clean:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 1rem 3rem rgba(12, 56, 122, 0.08) !important;
+        }
+</style>

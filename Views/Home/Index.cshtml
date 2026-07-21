@@ -1,0 +1,264 @@
+﻿@{
+    ViewData["Title"] = "ShieldInsure – India's Trusted Vehicle Insurance";
+}
+
+<!-- Custom Styles for Clean Light Theme Animations -->
+<style>
+    .light-hero-bg {
+        background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%);
+    }
+
+    .hover-lift-clean {
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+        .hover-lift-clean:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 1rem 3rem rgba(12, 56, 122, 0.08) !important;
+        }
+
+    html {
+        scroll-behavior: smooth;
+    }
+</style>
+
+<!-- 1. AIRY LIGHT HERO SECTION -->
+<section class="position-relative overflow-hidden light-hero-bg py-5" id="home" style="padding-top: 100px !important; padding-bottom: 120px !important;">
+    <div class="container position-relative z-index-1 py-4">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6">
+                <!-- Badge -->
+                <div class="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-white shadow-sm border border-light mb-4">
+                    <span class="badge bg-primary rounded-pill px-2 py-1">NEW</span>
+                    <span class="text-dark fw-bold small">India's #1 Digital Vehicle Insurance Portal</span>
+                </div>
+
+                <h1 class="display-4 fw-bolder text-dark mb-4" style="letter-spacing: -1.5px; line-height: 1.15;">
+                    Drive with Confidence.<br>
+                    <span style="color: #0c387a;">Claim with Ease.</span>
+                </h1>
+
+                <p class="lead text-muted mb-5 fw-normal" style="font-size: 1.1rem; line-height: 1.7;">
+                    Experience lightning-fast claim settlements, transparent pricing, and instant policy issuance backed by 19 years of industry trust.
+                </p>
+
+                <!-- Action Buttons -->
+                <div class="d-flex flex-wrap align-items-center gap-3">
+                    <a href="/Auth/Login" class="btn btn-lg fw-bold shadow-sm rounded-3 px-4 py-3 text-white transition-all" style="background-color: #0c387a;">
+                        <i class="fa-solid fa-shield-halved me-2 text-info"></i> Buy Policy Now
+                    </a>
+                    <a href="/Auth/Login" class="btn btn-outline-dark btn-lg fw-bold rounded-3 px-4 py-3 bg-white shadow-sm">
+                        <i class="fa-solid fa-right-to-bracket me-2"></i> Customer Login
+                    </a>
+                    <a href="/Auth/StaffLogin" class="btn btn-link fw-semibold text-decoration-none text-muted ms-2">
+                        <i class="fa-solid fa-user-tie me-1"></i> Staff Portal
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Visual Graphic / Stats preview -->
+            <div class="col-lg-6 d-none d-lg-block">
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="card border-0 shadow-sm rounded-4 p-4 bg-white text-center mb-3 hover-lift-clean">
+                            <div class="rounded-circle bg-primary bg-opacity-10 text-primary mx-auto d-flex align-items-center justify-content-center mb-3" style="width: 50px; height: 50px;">
+                                <i class="fa-solid fa-bolt fs-5"></i>
+                            </div>
+                            <h4 class="fw-bolder text-dark mb-1">Instant</h4>
+                            <span class="text-muted small">Policy Issuance</span>
+                        </div>
+                        <div class="card border-0 shadow-sm rounded-4 p-4 bg-white text-center hover-lift-clean">
+                            <div class="rounded-circle bg-success bg-opacity-10 text-success mx-auto d-flex align-items-center justify-content-center mb-3" style="width: 50px; height: 50px;">
+                                <i class="fa-solid fa-clock-rotate-left fs-5"></i>
+                            </div>
+                            <h4 class="fw-bolder text-dark mb-1">48 Hours</h4>
+                            <span class="text-muted small">Avg Settlement</span>
+                        </div>
+                    </div>
+                    <div class="col-6 pt-4">
+                        <div class="card border-0 shadow-sm rounded-4 p-4 bg-white text-center mb-3 hover-lift-clean">
+                            <div class="rounded-circle bg-warning bg-opacity-10 text-warning mx-auto d-flex align-items-center justify-content-center mb-3" style="width: 50px; height: 50px;">
+                                <i class="fa-solid fa-users fs-5"></i>
+                            </div>
+                            <h4 class="fw-bolder text-dark mb-1">150K+</h4>
+                            <span class="text-muted small">Active Drivers</span>
+                        </div>
+                        <div class="card border-0 shadow-sm rounded-4 p-4 bg-white text-center hover-lift-clean">
+                            <div class="rounded-circle bg-info bg-opacity-10 text-info mx-auto d-flex align-items-center justify-content-center mb-3" style="width: 50px; height: 50px;">
+                                <i class="fa-solid fa-award fs-5"></i>
+                            </div>
+                            <h4 class="fw-bolder text-dark mb-1">98.2%</h4>
+                            <span class="text-muted small">Claim Ratio</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 2. CLEAN STATS BAR -->
+<div class="bg-white border-bottom py-4 shadow-sm">
+    <div class="container">
+        <div class="row text-center g-4">
+            <div class="col-md-3 col-6 border-end-md">
+                <h3 class="fw-bolder text-dark mb-0">150,247+</h3>
+                <span class="text-muted small fw-semibold text-uppercase">Protected Vehicles</span>
+            </div>
+            <div class="col-md-3 col-6 border-end-md">
+                <h3 class="fw-bolder text-success mb-0">98.2%</h3>
+                <span class="text-muted small fw-semibold text-uppercase">Claims Settled</span>
+            </div>
+            <div class="col-md-3 col-6 border-end-md">
+                <h3 class="fw-bolder text-primary mb-0">Rs. 2.3B</h3>
+                <span class="text-muted small fw-semibold text-uppercase">Payouts Processed</span>
+            </div>
+            <div class="col-md-3 col-6">
+                <h3 class="fw-bolder text-warning mb-0">500+</h3>
+                <span class="text-muted small fw-semibold text-uppercase">Repair Partners</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 3. WHY CHOOSE US (FEATURES) -->
+<section class="py-5 bg-light" id="features">
+    <div class="container py-5">
+        <div class="text-center max-w-2xl mx-auto mb-5">
+            <span class="text-primary fw-bold text-uppercase small tracking-wide mb-2 d-block">THE SHIELDINSURE ADVANTAGE</span>
+            <h2 class="display-6 fw-bolder text-dark">The Smarter Way to Stay Protected</h2>
+            <p class="text-muted">We deliver complete peace of mind through a streamlined, transparent digital process.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="card border-0 shadow-sm rounded-4 p-4 h-100 bg-white hover-lift-clean">
+                    <div class="rounded-3 bg-primary bg-opacity-10 text-primary d-flex align-items-center justify-content-center mb-4" style="width: 60px; height: 60px;">
+                        <i class="fa-solid fa-bolt fs-4"></i>
+                    </div>
+                    <h5 class="fw-bold text-dark mb-2">Instant Digital Policy</h5>
+                    <p class="text-muted small mb-0">Get your policy document instantly after payment. Zero paperwork, 100% online issuance.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="card border-0 shadow-sm rounded-4 p-4 h-100 bg-white hover-lift-clean">
+                    <div class="rounded-3 bg-success bg-opacity-10 text-success d-flex align-items-center justify-content-center mb-4" style="width: 60px; height: 60px;">
+                        <i class="fa-solid fa-clock-rotate-left fs-4"></i>
+                    </div>
+                    <h5 class="fw-bold text-dark mb-2">48-Hour Settlement</h5>
+                    <p class="text-muted small mb-0">Our automated surveyor dispatch and compliance review ensures fast, hassle-free payouts.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="card border-0 shadow-sm rounded-4 p-4 h-100 bg-white hover-lift-clean">
+                    <div class="rounded-3 bg-warning bg-opacity-10 text-warning d-flex align-items-center justify-content-center mb-4" style="width: 60px; height: 60px;">
+                        <i class="fa-solid fa-shield-halved fs-4"></i>
+                    </div>
+                    <h5 class="fw-bold text-dark mb-2">Smart Fraud Protection</h5>
+                    <p class="text-muted small mb-0">AI-driven fraud detection keeps our network secure, ensuring genuine claims are prioritized.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 4. HOW IT WORKS (CLAIMS PROCESS) -->
+<section class="py-5 bg-white" id="how-it-works">
+    <div class="container py-5">
+        <div class="text-center max-w-2xl mx-auto mb-5">
+            <span class="text-primary fw-bold text-uppercase small tracking-wide mb-2 d-block">TRANSPARENT WORKFLOW</span>
+            <h2 class="display-6 fw-bolder text-dark">Simple 3-Step Claim Process</h2>
+            <p class="text-muted">Track your claim at every single stage from your customer portal.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="card border-0 bg-light rounded-4 p-4 h-100">
+                    <div class="text-primary fw-bolder fs-1 mb-2">01</div>
+                    <h5 class="fw-bold text-dark mb-2">Register Claim</h5>
+                    <p class="text-muted small mb-0">Log in to your customer dashboard and submit your incident report along with damage photos.</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card border-0 bg-light rounded-4 p-4 h-100">
+                    <div class="text-primary fw-bolder fs-1 mb-2">02</div>
+                    <h5 class="fw-bold text-dark mb-2">Field Inspection</h5>
+                    <p class="text-muted small mb-0">A certified survey officer inspects your vehicle and submits a verified damage report.</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card border-0 bg-light rounded-4 p-4 h-100">
+                    <div class="text-success fw-bolder fs-1 mb-2">03</div>
+                    <h5 class="fw-bold text-dark mb-2">Automated Payout</h5>
+                    <p class="text-muted small mb-0">Once cleared by compliance and approved, funds are transferred directly to your bank account.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 5. FAQ SECTION -->
+<section class="py-5 bg-light" id="faq">
+    <div class="container py-5">
+        <div class="text-center max-w-2xl mx-auto mb-5">
+            <span class="text-primary fw-bold text-uppercase small tracking-wide mb-2 d-block">HELP & SUPPORT</span>
+            <h2 class="display-6 fw-bolder text-dark">Frequently Asked Questions</h2>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="accordion shadow-sm rounded-4 overflow-hidden" id="faqAccordion">
+                    <div class="accordion-item border-0 border-bottom">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button fw-bold py-4 bg-white text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                How long does it take to process a claim?
+                            </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body text-muted bg-white pb-4">
+                                Most claims are processed and settled within 48 to 72 hours from the date of document submission.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item border-0 border-bottom">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed fw-bold py-4 bg-white text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                What documents are required to file a claim?
+                            </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body text-muted bg-white pb-4">
+                                You need: Policy Document, Vehicle Registration Certificate, Driving License, FIR (for theft/third-party), and clear photos of the damage.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item border-0">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed fw-bold py-4 bg-white text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                Can I track my claim status online?
+                            </button>
+                        </h2>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body text-muted bg-white pb-4">
+                                Yes. Once logged into your customer portal, navigate to your Dashboard to see real-time updates at every stage of the workflow.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 6. CONTACT STRIP -->
+<section class="py-5 bg-white border-top" id="contact">
+    <div class="container py-4 text-center">
+        <h3 class="fw-bolder text-dark mb-3">Need immediate assistance?</h3>
+        <p class="text-muted mb-4">Our emergency support team is available 24/7 to help you on the road.</p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <a href="tel:180020012345" class="btn btn-outline-dark fw-bold px-4 py-2 rounded-pill">
+                <i class="fa-solid fa-phone text-primary me-2"></i> 1800-200-12345
+            </a>
+            <a href="mailto:claims@shieldinsure.com" class="btn btn-outline-dark fw-bold px-4 py-2 rounded-pill">
+                <i class="fa-solid fa-envelope text-primary me-2"></i> claims@shieldinsure.com
+            </a>
+        </div>
+    </div>
+</section>

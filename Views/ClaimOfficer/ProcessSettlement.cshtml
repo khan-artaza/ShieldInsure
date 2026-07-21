@@ -1,0 +1,137 @@
+﻿@model Final_Insure.DTOs.ProcessSettlementDTO
+@using Final_Insure.Models
+
+
+
+@{
+    ViewData["Title"] = "Final Settlement Processing";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    // Safely cast the ViewBag data
+    var claim = ViewBag.ClaimData as Claim;
+
+    // If you passed Assessment and Fraud data, cast them here:
+    var assessment = ViewBag.AssessmentData as Assessment;
+    // var fraudCheck = ViewBag.FraudData as FraudCheck;
+}
+
+<div class="container-fluid mt-4 px-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold" style="color: #0c387a;"><i class="fa-solid fa-file-invoice-dollar me-2"></i> Final Claim Settlement</h2>
+            <p class="text-muted">Review all department reports and authorize final payout or rejection.</p>
+        </div>
+        <a asp-action="Dashboard" class="btn btn-outline-secondary fw-bold shadow-sm"><i class="fa-solid fa-arrow-left me-2"></i> Back to Dashboard</a>
+    </div>
+
+    <div class="row g-4">
+        <!-- LEFT SIDE: Comprehensive Case History -->
+        <div class="col-lg-7">
+            <div class="card shadow-sm border-0 rounded-3 h-100">
+                <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0"><i class="fa-solid fa-book-open-reader me-2"></i> Complete Case Master File</h5>
+                    <span class="badge bg-light text-dark">ID: #CLM-@Model.ClaimId.ToString("D4")</span>
+                </div>
+
+                <div class="card-body p-0" style="max-height: 700px; overflow-y: auto;">
+
+                    <!-- 1. CUSTOMER REQUEST -->
+                    <div class="p-4 border-bottom">
+                        <h6 class="text-uppercase fw-bold text-primary mb-3"><i class="fa-solid fa-user me-2"></i> 1. Customer Claim Request</h6>
+                        <div class="row">
+                            <div class="col-sm-6 mb-2"><strong>Incident Date:</strong> <br /> @claim?.IncidentDate.ToString("MMM dd, yyyy")</div>
+                            <div class="col-sm-6 mb-2"><strong>Requested Amount:</strong> <br /> <span class="text-danger fw-bold">$@claim?.ClaimAmount.ToString("N0")</span></div>
+                            <div class="col-12 mt-2">
+                                <strong>Customer Statement:</strong>
+                                <p class="text-muted bg-light p-2 rounded mt-1 border" style="font-size: 0.9rem;">@claim?.Description</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. SURVEYOR REPORT (Placeholder if you didn't pass ViewBag.AssessmentData) -->
+                    <div class="p-4 border-bottom bg-light">
+                        <h6 class="text-uppercase fw-bold text-success mb-3"><i class="fa-solid fa-clipboard-check me-2"></i> 2. Surveyor Field Report</h6>
+                        <div class="row">
+                            <div class="col-sm-6 mb-2">
+                                <strong>Assessed Repair Cost:</strong> <br />
+                                <span class="text-success fw-bold">
+                                    $@(assessment != null ? assessment.AssessedAmount.ToString("N0") : "Pending")
+                                </span>
+                            </div>
+                            <div class="col-sm-6 mb-2"><strong>Story Matches Damage:</strong> <br /> <span class="badge bg-success">Yes Verified</span></div>
+                            <div class="col-12 mt-2">
+                                <strong>Surveyor Remarks:</strong>
+                                <p class="text-muted p-0 m-0" style="font-size: 0.9rem;">Physical inspection complete. Damage is consistent with the described incident.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. COMPLIANCE REPORT (Placeholder if you didn't pass ViewBag.FraudData) -->
+                    <div class="p-4">
+                        <h6 class="text-uppercase fw-bold text-danger mb-3"><i class="fa-solid fa-shield-halved me-2"></i> 3. Compliance & Fraud Audit</h6>
+                        <div class="row">
+                            <div class="col-sm-6 mb-2"><strong>Fraud Risk Score:</strong> <br /> <span class="badge bg-success">25/100 (Low Risk)</span></div>
+                            <div class="col-sm-6 mb-2"><strong>Audit Status:</strong> <br /> <span class="text-success fw-bold"><i class="fa-solid fa-check-circle me-1"></i> Cleared for Payout</span></div>
+                            <div class="col-12 mt-2">
+                                <strong>Compliance Remarks:</strong>
+                                <p class="text-muted p-0 m-0" style="font-size: 0.9rem;">No fraudulent activity detected. Policy was active at the time of the incident.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT SIDE: Final Settlement Action Form -->
+        <div class="col-lg-5">
+            <div class="card shadow-lg border-0 rounded-3 sticky-top" style="top: 20px;">
+                <div class="card-header text-white" style="background: linear-gradient(135deg, #0c387a, #1856b5);">
+                    <h5 class="mb-0"><i class="fa-solid fa-money-check-dollar me-2"></i> Issue Final Decision</h5>
+                </div>
+                <div class="card-body p-4">
+
+                    <div class="alert alert-info border-0 shadow-sm mb-4">
+                        <i class="fa-solid fa-circle-info me-2"></i> You are legally authorizing the final status of this claim. This action cannot be undone.
+                    </div>
+
+                    <form asp-action="ProcessSettlement" method="post">
+                        <!-- Hidden ClaimId -->
+                        <input type="hidden" asp-for="ClaimId" />
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Final Approved Settlement Amount <span class="text-danger">*</span></label>
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-text bg-light text-success fw-bold">$</span>
+                                <!-- Pre-filled from the DTO, but the Officer can adjust it if necessary -->
+                                <input asp-for="SettlementAmount" type="number" step="0.01" class="form-control border-success fw-bold text-success" required />
+                            </div>
+                            <small class="text-muted">Ensure this matches the Surveyor's assessed cost unless overridden.</small>
+                            <span asp-validation-for="SettlementAmount" class="text-danger small"></span>
+                        </div>
+
+                        <!-- Use whatever property name you have in ProcessSettlementDTO for Approve/Reject status -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Final Verdict <span class="text-danger">*</span></label>
+                            <select name="FinalStatus" class="form-select form-select-lg border-primary fw-bold" required>
+                                <option value="">-- Select Decision --</option>
+                                <option value="Settled" class="text-success fw-bold">Approve & Issue Payment</option>
+                                <option value="Rejected" class="text-danger fw-bold">Reject Claim</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Final Authorization Remarks</label>
+                            <textarea name="OfficerRemarks" class="form-control" rows="3" placeholder="Add any final notes for the permanent record..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 fw-bold shadow-sm btn-lg text-white" style="background: #0c387a;">
+                            <i class="fa-solid fa-file-signature me-2"></i> Authorize & Close Claim
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

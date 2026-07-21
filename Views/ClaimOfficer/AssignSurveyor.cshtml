@@ -1,0 +1,50 @@
+﻿@model Final_Insure.DTOs.AssignSurveyorDTO
+@using Final_Insure.Models
+
+@{
+    ViewData["Title"] = "Assign Surveyor";
+    var surveyors = ViewBag.Surveyors as IEnumerable<User>;
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0 rounded-3">
+                <div class="card-header text-white" style="background-color: #0c387a;">
+                    <h5 class="mb-0">Assign Surveyor to Claim #@Model.ClaimId</h5>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="AssignSurveyor" method="post">
+                        <input type="hidden" asp-for="ClaimId" />
+
+                        <div class="mb-3">
+                            <label asp-for="SurveyorId" class="form-label fw-bold">Select Surveyor</label>
+                            <select asp-for="SurveyorId" class="form-select">
+                                <option value="">-- Choose a Surveyor --</option>
+                                @if (surveyors != null)
+                                {
+                                    foreach (var surveyor in surveyors)
+                                    {
+                                        <option value="@surveyor.UserId">@surveyor.Username (@surveyor.Email)</option>
+                                    }
+                                }
+                            </select>
+                            <span asp-validation-for="SurveyorId" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="OfficerNotes" class="form-label fw-bold">Instructions for Surveyor</label>
+                            <textarea asp-for="OfficerNotes" class="form-control" rows="3" placeholder="E.g., Please inspect the front bumper..."></textarea>
+                            <span asp-validation-for="OfficerNotes" class="text-danger small"></span>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a asp-action="Dashboard" class="btn btn-light border">Cancel</a>
+                            <button type="submit" class="btn shadow-sm" style="background-color: #ff8300; color: white; font-weight: bold;">Assign Claim</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+﻿@model Final_Insure.DTOs.SubmitAssessmentDTO
+
+@{
+    ViewData["Title"] = "Submit Assessment";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0 rounded-3">
+                <div class="card-header text-white bg-primary">
+                    <h5 class="mb-0">Field Assessment Report (Claim #@Model.ClaimId)</h5>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="SubmitAssessment" method="post">
+                        <input type="hidden" asp-for="ClaimId" />
+
+                        <div class="mb-3">
+                            <label asp-for="AssessedAmount" class="form-label fw-bold">Assessed Repair Amount ($)</label>
+                            <input asp-for="AssessedAmount" type="number" step="0.01" class="form-control" placeholder="E.g., 450.00" />
+                            <span asp-validation-for="AssessedAmount" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="SurveyorNotes" class="form-label fw-bold">Inspection Notes</label>
+                            <textarea asp-for="SurveyorNotes" class="form-control" rows="4" placeholder="Detail the damages observed..."></textarea>
+                            <span asp-validation-for="SurveyorNotes" class="text-danger small"></span>
+                        </div>
+
+                        <div class="alert alert-info border-0 bg-opacity-10 text-primary small">
+                            <i class="bi bi-info-circle-fill me-1"></i> Submitting this assessment will automatically forward the claim to the Compliance Officer for fraud checks.
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-3">
+                            <a asp-action="Dashboard" class="btn btn-light border">Cancel</a>
+                            <button type="submit" class="btn btn-primary fw-bold shadow-sm">Submit Assessment</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

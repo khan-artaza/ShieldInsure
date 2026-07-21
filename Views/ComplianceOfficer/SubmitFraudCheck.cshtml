@@ -1,0 +1,130 @@
+﻿@model Final_Insure.DTOs.SubmitFraudCheckDTO
+@using Final_Insure.Models
+@{
+    ViewData["Title"] = "Submit Fraud Check";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    // Safely cast ViewBag data passed from Controller
+    var claim = ViewBag.ClaimData as Claim;
+    var assessment = ViewBag.AssessmentData as Assessment;
+
+    // Determine Progress Bar Color based on the auto-calculated score
+    string barColor = "bg-success";
+    if (Model.FraudScore >= 80) barColor = "bg-danger";
+    else if (Model.FraudScore >= 50) barColor = "bg-warning";
+}
+
+<div class="container-fluid mt-4 px-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold text-danger">Fraud Investigation Report</h2>
+            <p class="text-muted">Review case file data and submit final verdict for Claim #@Model.ClaimId.</p>
+        </div>
+        <a asp-action="Dashboard" class="btn btn-outline-secondary fw-bold shadow-sm"><i class="fa-solid fa-arrow-left me-2"></i> Cancel & Back</a>
+    </div>
+
+    <div class="row g-4">
+        <!-- LEFT SIDE: Claim & Surveyor Case File -->
+        <div class="col-lg-5">
+            <div class="card shadow-sm border-0 rounded-3 h-100 border-secondary">
+                <div class="card-header bg-dark text-white">
+                    <h5 class="mb-0"><i class="fa-solid fa-folder-open me-2"></i> Case File Data</h5>
+                </div>
+                <div class="card-body p-4 bg-light">
+                    @if (claim != null)
+                    {
+                        <h6 class="text-uppercase fw-bold text-muted mb-3" style="font-size: 0.8rem;">1. Policy Details</h6>
+                        <p class="mb-1"><strong>Policy Status:</strong> <span class="badge @(claim.Policy?.Status == PolicyStatus.Active ? "bg-success" : "bg-danger")">@claim.Policy?.Status</span></p>
+                        <p><strong>Days since purchase:</strong> @(claim.Policy != null ? Math.Round((claim.IncidentDate - claim.Policy.StartDate).TotalDays) : "Unknown") days</p>
+
+                        <hr class="border-secondary" />
+                    }
+
+                    @if (assessment != null)
+                    {
+                        <h6 class="text-uppercase fw-bold text-muted mb-3 mt-3" style="font-size: 0.8rem;">2. Surveyor Field Report</h6>
+                        <div class="p-3 mb-3 border rounded @(assessment.AccidentMatchesDescription ? "bg-white border-success" : "bg-danger text-white")">
+                            <strong>Damage Matches Story?</strong><br />
+                            @if (assessment.AccidentMatchesDescription)
+                            {
+                                <span><i class="fa-solid fa-check-circle text-success me-1"></i> Yes, matches customer description.</span>
+                            }
+                            else
+                            {
+                                <span><i class="fa-solid fa-triangle-exclamation me-1"></i> NO. Flagged as highly suspicious by Surveyor!</span>
+                            }
+                        </div>
+                        <p class="mb-1"><strong>Assessed Cost:</strong> $@assessment.AssessedAmount.ToString("N0")</p>
+                        <p class="mb-1"><strong>Surveyor Notes:</strong> @(assessment.AssessmentRemarks ?? "None")</p>
+                    }
+                    else
+                    {
+                        <div class="alert alert-warning"><i class="fa-solid fa-circle-info me-2"></i> Surveyor report missing.</div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT SIDE: The Official Audit Form -->
+        <div class="col-lg-7">
+            <div class="card shadow-lg border-0 rounded-3 border-danger">
+                <div class="card-header text-white bg-danger">
+                    <h5 class="mb-0"><i class="fa-solid fa-gavel me-2"></i> Official Verdict</h5>
+                </div>
+                <div class="card-body p-4">
+
+                    <!-- Progress Bar Visualizer for the Score -->
+                    <div class="mb-4 p-4 border rounded" style="background: rgba(220, 53, 69, 0.05);">
+                        <div class="d-flex justify-content-between align-items-end mb-2">
+                            <span class="fw-bold text-dark">System Fraud Score:</span>
+                            <h3 class="mb-0 fw-bold @(Model.FraudScore >= 80 ? "text-danger" : "text-dark")">@Model.FraudScore<span style="font-size: 1rem; color: #999;">/100</span></h3>
+                        </div>
+                        <div class="progress" style="height: 12px;">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated @barColor" role="progressbar" style="width: @Model.FraudScore%;" aria-valuenow="@Model.FraudScore" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+
+                    <!-- YOUR EXISTING FORM LOGIC -->
+                    <form asp-action="SubmitFraudCheck" method="post">
+                        <input type="hidden" asp-for="ClaimId" />
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="FraudScore" class="form-label fw-bold">Calculated Risk Score</label>
+                                <div class="input-group">
+                                    <!-- Readonly: Prevents overriding the system calculation -->
+                                    <input asp-for="FraudScore" type="number" class="form-control fw-bold bg-light" readonly />
+                                    <span class="input-group-text bg-light">/ 100</span>
+                                </div>
+                                <span asp-validation-for="FraudScore" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label asp-for="RiskFlag" class="form-label fw-bold">Risk Level <span class="text-danger">*</span></label>
+                                <!-- Auto-generates dropdown from your RiskFlag Enum -->
+                                <select asp-for="RiskFlag" class="form-select border-danger fw-bold" asp-items="Html.GetEnumSelectList<RiskFlag>()">
+                                    <option value="">-- Select Risk Level --</option>
+                                </select>
+                                <span asp-validation-for="RiskFlag" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="InvestigatorRemarks" class="form-label fw-bold">Investigator Remarks <span class="text-danger">*</span></label>
+                            <textarea asp-for="InvestigatorRemarks" class="form-control" rows="4" placeholder="Detail the background check findings..." required></textarea>
+                            <span asp-validation-for="InvestigatorRemarks" class="text-danger small"></span>
+                        </div>
+
+                        <div class="alert alert-warning border-0 text-danger small shadow-sm" style="background-color: #fff3cd;">
+                            <i class="fa-solid fa-triangle-exclamation me-1"></i> Claims with a High/Critical flag or a score of 80+ will be automatically rejected.
+                        </div>
+
+                        <button type="submit" class="btn btn-danger w-100 fw-bold shadow-sm btn-lg mt-2">
+                            Submit Final Verdict <i class="fa-solid fa-file-signature ms-2"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,91 @@
+﻿@model Final_Insure.DTOs.UserRegisterDTO
+@using Final_Insure.Models
+@{
+    ViewData["Title"] = "Customer Registration";
+}
+
+<div class="d-flex align-items-center justify-content-center py-5" style="min-height: 92vh; background: linear-gradient(135deg, #090d16 0%, #1e293b 100%); padding-top: 140px !important;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+
+                <!-- Brand Header -->
+                <div class="text-center mb-4">
+                    <a class="navbar-brand fw-bold fs-3 text-white text-decoration-none d-inline-flex align-items-center" asp-controller="Home" asp-action="Index">
+                        <div class="bg-primary bg-opacity-25 rounded-3 p-2 me-2 d-flex align-items-center justify-content-center" style="width: 42px; height: 42px;">
+                            <i class="fa-solid fa-shield-halved text-info fs-5"></i>
+                        </div>
+                        Shield<span style="color: #38bdf8;">Insure</span>
+                    </a>
+                    <p class="text-secondary small mt-2 fw-medium tracking-wide">SECURE CUSTOMER ONBOARDING</p>
+                </div>
+
+                <!-- Glassmorphism Card -->
+                <div class="card border-0 shadow-lg rounded-4 p-4 p-md-5" style="background: rgba(255, 255, 255, 0.99); backdrop-filter: blur(20px);">
+                    <div class="mb-4 text-center">
+                        <h4 class="fw-bolder text-dark mb-1">Join the Network</h4>
+                        <p class="text-muted small mb-0">Get instant policies and 48-hour claim settlements.</p>
+                    </div>
+
+                    <!-- Error State -->
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="alert alert-danger border-0 rounded-3 py-2 px-3 small fw-semibold mb-4 d-flex align-items-center" style="background-color: #fef2f2; color: #dc2626;">
+                            <i class="fa-solid fa-triangle-exclamation me-2 fs-5"></i>
+                            <div>Please correct the errors below before proceeding.</div>
+                        </div>
+                    }
+
+                    <form asp-controller="Auth" asp-action="Register" method="post">
+                        <div class="mb-3">
+                            <label asp-for="Username" class="form-label fw-bold text-muted small text-uppercase tracking-wider">Full Name</label>
+                            <div class="position-relative">
+                                <i class="fa-solid fa-user position-absolute text-muted" style="left: 18px; top: 50%; transform: translateY(-50%);"></i>
+                                <input asp-for="Username" class="form-control form-control-lg bg-light border-0 shadow-none" style="padding-left: 48px; font-size: 0.95rem; border-radius: 10px;" placeholder="e.g. John Doe" required />
+                            </div>
+                            <span asp-validation-for="Username" class="text-danger small mt-1 d-block"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label fw-bold text-muted small text-uppercase tracking-wider">Email Address</label>
+                            <div class="position-relative">
+                                <i class="fa-solid fa-envelope position-absolute text-muted" style="left: 18px; top: 50%; transform: translateY(-50%);"></i>
+                                <input asp-for="Email" type="email" class="form-control form-control-lg bg-light border-0 shadow-none" style="padding-left: 48px; font-size: 0.95rem; border-radius: 10px;" placeholder="name@example.com" required />
+                            </div>
+                            <span asp-validation-for="Email" class="text-danger small mt-1 d-block"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="Password" class="form-label fw-bold text-muted small text-uppercase tracking-wider">Password</label>
+                            <div class="position-relative">
+                                <i class="fa-solid fa-lock position-absolute text-muted" style="left: 18px; top: 50%; transform: translateY(-50%);"></i>
+                                <input asp-for="Password" type="password" class="form-control form-control-lg bg-light border-0 shadow-none" style="padding-left: 48px; font-size: 0.95rem; border-radius: 10px;" placeholder="••••••••" required />
+                            </div>
+                            <span asp-validation-for="Password" class="text-danger small mt-1 d-block"></span>
+                        </div>
+
+                        <!-- Role is handled automatically by the DTO default value (UserRole.Customer) -->
+                        <input type="hidden" asp-for="Role" value="@UserRole.Customer" />
+
+                        <button type="submit" class="btn btn-lg w-100 fw-bold shadow-sm rounded-3 text-dark transition-all py-3" style="background-color: #38bdf8; letter-spacing: 0.3px;">
+                            Create Account <i class="fa-solid fa-user-plus ms-2"></i>
+                        </button>
+                    </form>
+
+                    <div class="text-center mt-4 border-top pt-4">
+                        <p class="text-muted small mb-0">
+                            Already have an account? <a asp-controller="Auth" asp-action="Login" class="text-decoration-none fw-bold" style="color: #0f172a;">Sign In</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="text-center mt-4 mb-4">
+                    <a asp-controller="Home" asp-action="Index" class="text-decoration-none text-secondary small fw-semibold">
+                        <i class="fa-solid fa-arrow-left me-1"></i> Back to Homepage
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

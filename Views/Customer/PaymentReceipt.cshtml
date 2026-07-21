@@ -1,0 +1,61 @@
+﻿@model Final_Insure.Models.Claim
+
+@{
+    ViewData["Title"] = "My Settlement Receipt";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow border-0 rounded-4">
+                <div class="card-header text-white text-center py-4" style="background: linear-gradient(135deg, #198754, #146c43);">
+                    <i class="fa-solid fa-circle-check" style="font-size: 3rem;"></i>
+                    <h3 class="mt-2 fw-bold">Claim Settled Successfully</h3>
+                    <p class="mb-0 text-light">Official Transaction Receipt</p>
+                </div>
+
+                <div class="card-body p-5">
+                    <div class="row mb-4">
+                        <div class="col-6">
+                            <h6 class="text-muted text-uppercase mb-1" style="font-size: 0.8rem;">Claim Reference ID</h6>
+                            <h5 class="fw-bold">#CLM-@Model.ClaimId.ToString("D4")</h5>
+                        </div>
+                        <div class="col-6 text-end">
+                            <h6 class="text-muted text-uppercase mb-1" style="font-size: 0.8rem;">Settlement Date</h6>
+                            <h5 class="fw-bold">@(Model.IncidentDate.ToString("MMM dd, yyyy") ?? DateTime.Now.ToString("MMM dd, yyyy"))</h5>
+                        </div>
+                    </div>
+
+                    <hr class="border-secondary mb-4" />
+
+                    <div class="row mb-3">
+                        <div class="col-6 text-muted">Original Requested Amount:</div>
+                        <div class="col-6 text-end fw-bold">$@Model.ClaimAmount.ToString("N0")</div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-6 text-muted">Claim Type:</div>
+                        <div class="col-6 text-end fw-bold">@Model.ClaimType</div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-6 text-muted">Final Status:</div>
+                        <div class="col-6 text-end"><span class="badge bg-success fs-6 px-3">@Model.ClaimStatus</span></div>
+                    </div>
+
+                    <div class="p-4 mt-4 rounded" style="background-color: #f8f9fa; border-left: 5px solid #198754;">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0 text-muted">Total Approved Payout</h5>
+                            <h2 class="mb-0 fw-bold text-success">$@Model.ClaimAmount.ToString("N0")</h2>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-5">
+                        <button onclick="window.print()" class="btn btn-outline-dark me-2 shadow-sm"><i class="fa-solid fa-print me-2"></i> Print Receipt</button>
+                        <!-- Routes back to the Customer Dashboard -->
+                        <a asp-controller="Customer" asp-action="Dashboard" class="btn btn-primary shadow-sm">Return to My Dashboard</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

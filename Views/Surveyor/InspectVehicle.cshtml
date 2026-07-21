@@ -1,0 +1,105 @@
+﻿@model Final_Insure.Models.Claim
+@{
+    ViewData["Title"] = "Vehicle Inspection Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid mt-4 px-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold" style="color: #37474F;">Vehicle Inspection: #CLM-@Model.ClaimId.ToString("D4")</h2>
+            <p class="text-muted">Verify the damage, check for fraud, and submit your official repair estimate.</p>
+        </div>
+        <a asp-action="Dashboard" class="btn btn-outline-secondary fw-bold shadow-sm"><i class="fa-solid fa-arrow-left me-2"></i> Cancel</a>
+    </div>
+
+    <div class="row g-4">
+        <!-- LEFT SIDE: Read-Only Claim Details -->
+        <div class="col-lg-5">
+            <div class="card shadow-sm border-0 rounded-3 h-100">
+                <div class="card-header bg-dark text-white">
+                    <h5 class="mb-0"><i class="fa-solid fa-file-invoice me-2"></i> Customer's Claim Report</h5>
+                </div>
+                <div class="card-body p-4 bg-light">
+                    <p><strong>Incident Date:</strong> @Model.IncidentDate.ToString("MMM dd, yyyy")</p>
+                    <p><strong>Location:</strong> @Model.AccidentAddress</p>
+                    <p><strong>Claim Type:</strong> @Model.ClaimType</p>
+                    <div class="p-3 mb-3 border rounded bg-white">
+                        <strong class="d-block mb-2">Customer Description:</strong>
+                        <span class="text-muted">@Model.Description</span>
+                    </div>
+                    <div class="p-3 border rounded text-center" style="background: rgba(12, 56, 122, 0.1);">
+                        <span class="d-block text-muted text-uppercase fw-bold" style="font-size: 0.8rem;">Amount Requested by Customer</span>
+                        <h2 class="mb-0 fw-bold text-primary">$@Model.ClaimAmount.ToString("N0")</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT SIDE: The Assessment Form -->
+        <div class="col-lg-7">
+            <div class="card shadow-lg border-0 rounded-3">
+                <div class="card-header text-white" style="background: #00897B;">
+                    <h5 class="mb-0"><i class="fa-solid fa-clipboard-check me-2"></i> Official Assessment Form</h5>
+                </div>
+                <div class="card-body p-4">
+                    <!-- Note the enctype="multipart/form-data" which is REQUIRED for uploading photos -->
+                    <form asp-action="SubmitAssessment" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="ClaimId" value="@Model.ClaimId" />
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Actual Car Number Verified <span class="text-danger">*</span></label>
+                                <input type="text" name="CarNumber" class="form-control" placeholder="e.g. MH 01 AB 1234" required />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Garage/Workshop Details</label>
+                                <input type="text" name="GarageDetails" class="form-control" placeholder="Name of garage repairing vehicle" />
+                            </div>
+                        </div>
+
+                        <!-- FRAUD CHECK -->
+                        <div class="mb-4 p-3 border rounded border-warning" style="background: #FFF8E1;">
+                            <label class="form-label fw-bold text-dark"><i class="fa-solid fa-shield-halved text-warning me-2"></i>Fraud Check: Does the physical damage match the customer's description? <span class="text-danger">*</span></label>
+                            <div class="d-flex gap-4 mt-2">
+                                <div class="form-check">
+                                    <!-- Use name="..." instead of asp-for -->
+                                    <input class="form-check-input" type="radio" name="AccidentMatchesDescription" id="matchYes" value="true" required>
+                                    <label class="form-check-label text-success fw-bold" for="matchYes"><i class="fa-solid fa-thumbs-up me-1"></i> Yes, it matches</label>
+                                </div>
+                                <div class="form-check">
+                                    <!-- Use name="..." instead of asp-for -->
+                                    <input class="form-check-input" type="radio" name="AccidentMatchesDescription" id="matchNo" value="false">
+                                    <label class="form-check-label text-danger fw-bold" for="matchNo"><i class="fa-solid fa-triangle-exclamation me-1"></i> No, suspicious</label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- SURVEYOR ESTIMATE -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Your Estimated Repair Cost (Assessed Amount) <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light fw-bold">$</span>
+                                <input type="number" step="0.01" name="AssessedAmount" class="form-control form-control-lg border-primary" placeholder="Enter actual repair cost" required />
+                            </div>
+                            <small class="text-muted">Compare this to the customer's requested amount of $@Model.ClaimAmount.ToString("N0").</small>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Upload Inspection Photo <span class="text-danger">*</span></label>
+                            <input type="file" name="EvidencePhoto" class="form-control" accept="image/*" required />
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Additional Remarks</label>
+                            <textarea name="AssessmentRemarks" class="form-control" rows="3" placeholder="Notes for the Claim Officer..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn w-100 fw-bold shadow-sm btn-lg text-white" style="background: #00897B;">
+                            Submit Assessment Report <i class="fa-solid fa-check-double ms-2"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

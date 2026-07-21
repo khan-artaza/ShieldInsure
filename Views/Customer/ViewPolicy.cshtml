@@ -1,0 +1,35 @@
+﻿@model Final_Insure.Models.Policy
+
+@{
+    ViewData["Title"] = "Policy Details";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-sm border-0 rounded-3 mx-auto" style="max-width: 600px;">
+        <div class="card-header text-white" style="background: linear-gradient(135deg, #0c387a, #1856b5);">
+            <h5 class="mb-0">Policy Details: @Model.PolicyNumber</h5>
+        </div>
+        <div class="card-body p-4">
+            <ul class="list-group list-group-flush mb-4">
+                <li class="list-group-item d-flex justify-content-between px-0">
+                    <strong>Type:</strong> <span>@Model.PolicyType Insurance</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between px-0">
+                    <strong>Coverage Limit:</strong> <span class="text-success fw-bold">$@Model.CoverageAmount.ToString("N0")</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between px-0">
+                    <strong>Monthly Premium:</strong> <span>$@Model.PremiumAmount.ToString("0.00")</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between px-0">
+                    <strong>Vehicle RC:</strong> <span>@(Model.VehicleRC ?? "N/A")</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between px-0">
+                    <strong>Validity:</strong> <span>@Model.StartDate.ToString("MMM dd, yyyy") - @Model.EndDate.ToString("MMM dd, yyyy")</span>
+                </li>
+            </ul>
+            <div class="d-grid">
+                <a asp-action="Dashboard" class="btn btn-outline-primary">Back to Dashboard</a>
+            </div>
+        </div>
+    </div>
+</div>

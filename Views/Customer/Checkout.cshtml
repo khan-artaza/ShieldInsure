@@ -1,0 +1,89 @@
+﻿@model Final_Insure.DTOs.CheckoutDTO
+
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<style>
+    .checkout-header {
+        background-color: #0c387a;
+        color: white;
+        border-radius: 12px 12px 0 0;
+        padding: 1rem 1.5rem;
+    }
+
+    .summary-box {
+        background-color: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 1.5rem;
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm border-0 rounded-3">
+                <div class="checkout-header d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0 fw-bold">Secure Checkout</h4>
+                    
+                </div>
+
+                <div class="card-body p-4">
+                    <!-- Order Summary -->
+                    <div class="summary-box mb-4">
+                        <h5 class="fw-bold text-primary mb-3">Order Summary</h5>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-muted">Selected Plan:</span>
+                            <span class="fw-bold">@Model.PlanName</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-muted">Max Coverage:</span>
+                            <span class="fw-bold text-success">$@Model.CoverageAmount.ToString("N0")</span>
+                        </div>
+                        <hr />
+                        <div class="d-flex justify-content-between">
+                            <span class="fw-bold fs-5">Total Premium:</span>
+                            <span class="fw-bold fs-5 text-dark">$@Model.PremiumAmount.ToString("N2")</span>
+                        </div>
+                    </div>
+
+                    <!-- Vehicle Details Form -->
+                    <h5 class="fw-bold text-primary mb-3">Vehicle Details</h5>
+
+                    <form asp-action="Checkout" method="post">
+
+                        <!-- Hidden fields to pass the pricing data back to the POST controller -->
+                        <input type="hidden" asp-for="PlanId" />
+                        <input type="hidden" asp-for="PlanName" />
+                        <input type="hidden" asp-for="PremiumAmount" />
+                        <input type="hidden" asp-for="CoverageAmount" />
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="VehicleRC" class="form-label fw-bold text-muted">Vehicle RC Number *</label>
+                                <input asp-for="VehicleRC" class="form-control" placeholder="e.g. MH-01-AB-1234" />
+                                <span asp-validation-for="VehicleRC" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="ChassisNumber" class="form-label fw-bold text-muted">Chassis Number *</label>
+                                <input asp-for="ChassisNumber" class="form-control" placeholder="17-character VIN" />
+                                <span asp-validation-for="ChassisNumber" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <!-- Mock Payment Section -->
+                        
+
+                        <div class="d-flex justify-content-between align-items-center mt-4">
+                            <a asp-action="BuyPolicy" class="text-decoration-none text-secondary">← Back to Plans</a>
+                            <button type="submit" class="btn btn-success btn-lg px-5 fw-bold shadow-sm">
+                                Pay $@Model.PremiumAmount.ToString("N0") & Generate Policy
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

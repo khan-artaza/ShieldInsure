@@ -1,0 +1,221 @@
+﻿@model IEnumerable<Final_Insure.Models.Claim>
+@using Final_Insure.Models
+@{
+    ViewData["Title"] = "Claim Officer Desk";
+
+    // 1. New Claims
+    var newClaims = Model?.Where(c => c.ClaimStatus == ClaimStatus.Registered).ToList() ?? new List<Claim>();
+    // 2. Active Investigations (Assigned to Surveyor/Compliance)
+    var inInvestigation = Model?.Where(c => c.ClaimStatus != ClaimStatus.Registered &&
+                                            c.ClaimStatus != ClaimStatus.PendingFinalApproval &&
+                                            c.ClaimStatus != ClaimStatus.Approved &&
+                                            c.ClaimStatus != ClaimStatus.Settled &&
+                                            c.ClaimStatus != ClaimStatus.Rejected).ToList() ?? new List<Claim>();
+    // 3. Ready for Final Decision
+    var readyForDecision = Model?.Where(c => c.ClaimStatus == ClaimStatus.PendingFinalApproval).ToList() ?? new List<Claim>();
+    // 4. Payment & Settlement History
+    var paymentHistory = Model?.Where(c => c.ClaimStatus == ClaimStatus.Approved || c.ClaimStatus == ClaimStatus.Settled).ToList() ?? new List<Claim>();
+}
+
+<div class="container-fluid py-2">
+    <!-- Page Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h3 class="fw-bolder text-dark mb-1">Operations Desk</h3>
+            <p class="text-muted mb-0">Manage workflows, assign field surveyors, and authorize payouts.</p>
+        </div>
+    </div>
+
+    <!-- Success Message Alert -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show shadow-sm border-0 rounded-3 mb-4" role="alert">
+            <i class="fa-solid fa-circle-check me-2"></i> @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <div class="row g-4">
+        <!-- LEFT COLUMN: Action Required -->
+        <div class="col-lg-8">
+
+            <!-- STAGE 1: NEW CLAIMS (Needs Assignment) -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+                    <h6 class="mb-0 fw-bold text-primary"><i class="fa-solid fa-inbox me-2"></i> 1. New Claims (Needs Surveyor)</h6>
+                    <span class="badge bg-primary rounded-pill px-3">@newClaims.Count()</span>
+                </div>
+                <div class="card-body p-0">
+                    @if (newClaims.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead class="bg-light text-muted">
+                                    <tr>
+                                        <th class="ps-4">Claim ID</th>
+                                        <th>Date Submitted</th>
+                                        <th>Type</th>
+                                        <th>Est. Amount</th>
+                                        <th class="text-end pe-4">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var claim in newClaims.OrderByDescending(c => c.SubmittedAt))
+                                    {
+                                        <tr>
+                                            <td class="ps-4 fw-bold text-dark">#CLM-@claim.ClaimId.ToString("D4")</td>
+                                            <td>@claim.SubmittedAt.ToString("MMM dd, yyyy")</td>
+                                            <td>@claim.ClaimType</td>
+                                            <td class="fw-semibold text-primary">$@claim.ClaimAmount.ToString("N0")</td>
+                                            <td class="text-end pe-4">
+                                                <a asp-action="ClaimDetails" asp-route-claimId="@claim.ClaimId" class="btn btn-sm btn-primary fw-semibold shadow-sm">
+                                                    Assign <i class="fa-solid fa-arrow-right ms-1"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="p-4 text-center text-muted">
+                            <p class="mb-0 small">No new claims requiring assignment.</p>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <!-- STAGE 3: READY FOR DECISION (Returned from Surveyor) -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+                    <h6 class="mb-0 fw-bold text-warning text-darken"><i class="fa-solid fa-gavel me-2"></i> 2. Ready for Final Decision</h6>
+                    <span class="badge bg-warning text-dark rounded-pill px-3">@readyForDecision.Count()</span>
+                </div>
+                <div class="card-body p-0">
+                    @if (readyForDecision.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead class="bg-light text-muted">
+                                    <tr>
+                                        <th class="ps-4">Claim ID</th>
+                                        <th>Report Date</th>
+                                        <th>Surveyor Rec. Amount</th>
+                                        <th class="text-end pe-4">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var claim in readyForDecision)
+                                    {
+                                        <tr>
+                                            <td class="ps-4 fw-bold text-dark">#CLM-@claim.ClaimId.ToString("D4")</td>
+                                            <td>@DateTime.Now.ToString("MMM dd, yyyy")</td>
+                                            <td class="fw-semibold text-warning text-darken">$@claim.ClaimAmount.ToString("N0")</td>
+                                            <td class="text-end pe-4">
+                                                <a asp-action="ProcessSettlement" asp-route-claimId="@claim.ClaimId" class="btn btn-sm btn-dark fw-semibold shadow-sm">
+                                                    Review <i class="fa-solid fa-check-double ms-1"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="p-5 text-center text-muted">
+                            <i class="fa-solid fa-file-signature fs-2 mb-3 text-secondary opacity-50 d-block"></i>
+                            <h6 class="fw-semibold text-dark">No Approvals Pending</h6>
+                            <p class="mb-0 small">Claims will appear here when Surveyors submit their reports.</p>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <!-- STAGE 4: PAYMENT & SETTLEMENT HISTORY -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+                    <h6 class="mb-0 fw-bold text-success"><i class="fa-solid fa-money-check-dollar me-2"></i> 3. Settlement History</h6>
+                    <span class="badge bg-success bg-opacity-10 text-success border border-success rounded-pill px-3">@paymentHistory.Count()</span>
+                </div>
+                <div class="card-body p-0">
+                    @if (paymentHistory.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead class="bg-light text-muted">
+                                    <tr>
+                                        <th class="ps-4">Claim ID</th>
+                                        <th>Approved Amount</th>
+                                        <th>Status</th>
+                                        <th class="text-end pe-4">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var claim in paymentHistory.OrderByDescending(c => c.ClaimId))
+                                    {
+                                        <tr>
+                                            <td class="ps-4 fw-bold text-dark">#CLM-@claim.ClaimId.ToString("D4")</td>
+                                            <td class="fw-semibold text-success">$@claim.ClaimAmount.ToString("N0")</td>
+                                            <td><span class="badge bg-success bg-opacity-10 text-success border border-success rounded-pill px-2">@claim.ClaimStatus</span></td>
+                                            <td class="text-end pe-4">
+                                                <a asp-action="PaymentReceipt" asp-route-claimId="@claim.ClaimId" class="btn btn-sm btn-light border fw-semibold text-dark shadow-sm">
+                                                    <i class="fa-solid fa-receipt me-1"></i> Receipt
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="p-4 text-center text-muted">
+                            <p class="mb-0 small">No finalized payments found.</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT COLUMN: Tracking -->
+        <div class="col-lg-4">
+            <!-- STAGE 2: IN INVESTIGATION (Tracking Status) -->
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+                    <h6 class="mb-0 fw-bold text-secondary"><i class="fa-solid fa-magnifying-glass me-2"></i> Active Investigations</h6>
+                    <span class="badge bg-secondary rounded-pill px-3">@inInvestigation.Count()</span>
+                </div>
+                <div class="card-body p-0">
+                    @if (inInvestigation.Any())
+                    {
+                        <div class="list-group list-group-flush">
+                            @foreach (var claim in inInvestigation)
+                            {
+                                <div class="list-group-item p-4">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span class="fw-bold text-dark">#CLM-@claim.ClaimId.ToString("D4")</span>
+                                        <span class="badge bg-info bg-opacity-10 text-info border border-info rounded-pill px-2">@claim.ClaimStatus</span>
+                                    </div>
+                                    <p class="text-muted small mb-0"><i class="fa-solid fa-user-clock me-1"></i> Currently assigned to Field/Compliance team.</p>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="p-5 text-center text-muted">
+                            <i class="fa-solid fa-list-check fs-2 mb-3 text-secondary opacity-50 d-block"></i>
+                            <h6 class="fw-semibold text-dark">Queue Empty</h6>
+                            <p class="mb-0 small">No claims currently under investigation.</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,129 @@
+﻿using Final_Insure.DTOs;
+using Final_Insure.Models;
+using Final_Insure.Repositories.Interfaces;
+using Final_Insure.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Final_Insure.Controllers
+{
+    // Locks this controller down so ONLY Claim Officers can access it
+    [Authorize(Roles = "ClaimOfficer")]
+    public class ClaimOfficerController : Controller
+    {
+        private readonly IClaimRepository _claimRepo;
+        private readonly IUserRepository _userRepo;
+        private readonly IClaimService _claimService;
+        private readonly IAssessmentRepository _assessmentRepo;
+
+        public ClaimOfficerController(
+            IClaimRepository claimRepo,
+            IUserRepository userRepo,
+            IClaimService claimService,
+            IAssessmentRepository assessmentRepo)
+        {
+            _claimRepo = claimRepo;
+            _userRepo = userRepo;
+            _claimService = claimService;
+            _assessmentRepo = assessmentRepo;
+        }
+
+        // 1. GET: Show claims needing attention
+        [HttpGet]
+        public async Task<IActionResult> Dashboard()
+        {
+            // Fetch ALL claims so our new Dashboard UI can sort them into the 4 buckets
+            // (New, In Investigation, Ready for Decision, History)
+            var allClaims = await _claimRepo.GetAllAsync();
+
+            return View(allClaims);
+        }
+
+        // 2. GET: Show the full details of a specific claim AND the Assignment Dropdown
+        [HttpGet]
+        public async Task<IActionResult> ClaimDetails(int claimId)
+        {
+            // Fetch the claim using your Repository
+            var claim = await _claimRepo.GetByIdAsync(claimId);
+            if (claim == null) return NotFound();
+
+            // Fetch a list of all Surveyors using your Repository
+            var allSurveyors = await _userRepo.GetUsersByRoleAsync(UserRole.Surveyor);
+
+            // Only pass APPROVED Surveyors to the view
+            ViewBag.AvailableSurveyors = allSurveyors.Where(u => u.IsApproved).ToList();
+
+            return View(claim);
+        }
+
+        // 3. POST: Assign the claim to the chosen Surveyor
+        [HttpPost]
+        public async Task<IActionResult> AssignSurveyor(int claimId, int surveyorId)
+        {
+            // We map the incoming data directly into your existing DTO
+            var dto = new AssignSurveyorDTO
+            {
+                ClaimId = claimId,
+                SurveyorId = surveyorId
+            };
+
+            // We use your existing Service to handle the database save and status update!
+            await _claimService.MoveToSurveyorAsync(dto);
+
+            TempData["SuccessMessage"] = $"Claim #{claimId} has been successfully assigned to the Surveyor.";
+            return RedirectToAction("Dashboard");
+        }
+
+        // 4. GET: Form for final approval/rejection
+        [HttpGet]
+        public async Task<IActionResult> ProcessSettlement(int claimId)
+        {
+            var claim = await _claimRepo.GetByIdAsync(claimId);
+            if (claim == null) return NotFound();
+
+            // 1. Fetch the Surveyor's Assessment from the database
+            // (If you don't have _assessmentRepo injected here, you can inject it in the constructor, 
+            // or use _context.Assessments.FirstOrDefaultAsync...)
+            var assessment = await _assessmentRepo.GetAssessmentByClaimIdAsync(claimId);
+
+            // 2. Pass BOTH to the view so the UI can display them side-by-side
+            ViewBag.ClaimData = claim;
+            ViewBag.AssessmentData = assessment;
+
+            // 3. Set the default Settlement Amount to the SURVEYOR'S assessed amount!
+            decimal suggestedAmount = assessment != null ? assessment.AssessedAmount : claim.ClaimAmount;
+
+            var dto = new ProcessSettlementDTO
+            {
+                ClaimId = claimId,
+                SettlementAmount = suggestedAmount // <-- THIS FIXES BUG 3 (Right Side Form)
+            };
+
+            return View(dto);
+        }
+
+        // 5. POST: Finalize the claim
+        [HttpPost]
+        public async Task<IActionResult> ProcessSettlement(ProcessSettlementDTO dto)
+        {
+            if (!ModelState.IsValid) return View(dto);
+
+            await _claimService.ProcessFinalSettlementAsync(dto);
+
+            TempData["SuccessMessage"] = $"Claim has been {dto.FinalStatus}!";
+            return RedirectToAction("Dashboard");
+        }
+
+        // GET: View Final Settlement/Payment Receipt
+        [HttpGet]
+        public async Task<IActionResult> PaymentReceipt(int claimId)
+        {
+            var claim = await _claimRepo.GetByIdAsync(claimId);
+
+            // If the claim doesn't exist in the database, this triggers the "Not Found" error!
+            if (claim == null) return NotFound();
+
+            return View(claim);
+        }
+    }
+}

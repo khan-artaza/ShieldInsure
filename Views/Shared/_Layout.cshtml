@@ -1,193 +1,197 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>@ViewData["Title"] — ShieldInsure</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] — ShieldInsure</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
 </head>
 <body>
 
-@if (User.Identity.IsAuthenticated)
-{
-    <!-- ── AUTHENTICATED SHELL ── -->
-    <div id="wrapper">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <!-- ── AUTHENTICATED SHELL ── -->
+        <div id="wrapper">
 
-      <!-- SIDEBAR OVERLAY (mobile) -->
-      <div class="sidebar-overlay" id="sidebarOverlay"></div>
+            <!-- SIDEBAR OVERLAY (mobile) -->
+            <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-      <!-- ────────── SIDEBAR ────────── -->
-      <aside id="sidebar-wrapper" role="navigation" aria-label="Main navigation">
+            <!-- ────────── SIDEBAR ────────── -->
+            <aside id="sidebar-wrapper" role="navigation" aria-label="Main navigation">
 
-        <!-- Brand -->
-        <a asp-controller="Home" asp-action="Index" class="sidebar-brand">
-          <div class="sidebar-logo-mark">
-            <!-- Shield SVG logo -->
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 2L3 6v6c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V6l-9-4zm-1 13l-3-3 1.41-1.41L11 12.17l4.59-4.58L17 9l-6 6z"/>
-            </svg>
-          </div>
-          <span class="sidebar-brand-name">Shield<em>Insure</em></span>
-        </a>
+                <!-- Brand -->
+                <a asp-controller="Home" asp-action="Index" class="sidebar-brand">
+                    <div class="sidebar-logo-mark">
+                        <!-- Shield SVG logo -->
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L3 6v6c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V6l-9-4zm-1 13l-3-3 1.41-1.41L11 12.17l4.59-4.58L17 9l-6 6z" />
+                        </svg>
+                    </div>
+                    <span class="sidebar-brand-name">Shield<em>Insure</em></span>
+                </a>
 
-        <!-- Nav -->
-        <nav class="sidebar-nav">
-          <div class="nav-section-label">Workspace</div>
-          <a asp-controller="Home" asp-action="Index" class="sidebar-link">
-            <span class="nav-icon"><i class="fa-solid fa-gauge-high"></i></span>
-            <span class="nav-text">Dashboard</span>
-          </a>
-          <a asp-controller="Auth" asp-action="Profile" class="sidebar-link">
-            <span class="nav-icon"><i class="fa-solid fa-circle-user"></i></span>
-            <span class="nav-text">My Profile</span>
-          </a>
-        </nav>
+                <!-- Nav -->
+                <nav class="sidebar-nav">
+                    <div class="nav-section-label">Workspace</div>
+                    <a asp-controller="Home" asp-action="Index" class="sidebar-link">
+                        <span class="nav-icon"><i class="fa-solid fa-gauge-high"></i></span>
+                        <span class="nav-text">Dashboard</span>
+                    </a>
+                    <a asp-controller="Auth" asp-action="Profile" class="sidebar-link">
+                        <span class="nav-icon"><i class="fa-solid fa-circle-user"></i></span>
+                        <span class="nav-text">My Profile</span>
+                    </a>
+                </nav>
 
-        <!-- Footer / Logout -->
-        <div class="sidebar-foot">
-          <form asp-controller="Auth" asp-action="Logout" method="post">
-            <button type="submit" class="sidebar-logout">
-              <span class="nav-icon"><i class="fa-solid fa-right-from-bracket"></i></span>
-              <span>Sign Out</span>
-            </button>
-          </form>
+                <!-- Footer / Logout -->
+                <div class="sidebar-foot">
+                    <form asp-controller="Auth" asp-action="Logout" method="post">
+                        <button type="submit" class="sidebar-logout">
+                            <span class="nav-icon"><i class="fa-solid fa-right-from-bracket"></i></span>
+                            <span>Sign Out</span>
+                        </button>
+                    </form>
+                </div>
+
+            </aside>
+            <!-- ────────── END SIDEBAR ────────── -->
+            <!-- ────────── PAGE CONTENT ────────── -->
+            <div id="page-content-wrapper">
+
+                @if (!(ViewData["HideNavbar"] as bool? ?? false))
+                {
+                    <!-- Topbar -->
+                    <header class="app-topbar">
+                        <button class="topbar-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">
+                            <i class="fa-solid fa-bars" style="font-size:1rem;"></i>
+                        </button>
+                        <span class="topbar-title d-none d-sm-inline">@ViewData["Title"]</span>
+                        <div class="topbar-user">
+                            <div class="topbar-avatar">@User.Identity.Name.Substring(0, 1).ToUpper()</div>
+                            <span class="topbar-username">@User.Identity.Name</span>
+                        </div>
+                    </header>
+                }
+
+                <!-- Main content -->
+                <main class="page-main">
+                    @RenderBody()
+                </main>
+
+                <!-- Footer -->
+                <footer class="app-footer">
+                    &copy; @DateTime.Now.Year ShieldInsure &mdash; Secure Enterprise Claims Platform
+                </footer>
+
+            </div>
+            <!-- ────────── END PAGE CONTENT ────────── -->
+
         </div>
-
-      </aside>
-      <!-- ────────── END SIDEBAR ────────── -->
-
-      <!-- ────────── PAGE CONTENT ────────── -->
-      <div id="page-content-wrapper">
-
-        <!-- Topbar -->
-        <header class="app-topbar">
-          <button class="topbar-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">
-            <i class="fa-solid fa-bars" style="font-size:1rem;"></i>
-          </button>
-          <span class="topbar-title d-none d-sm-inline">@ViewData["Title"]</span>
-          <div class="topbar-user">
-            <div class="topbar-avatar">@User.Identity.Name.Substring(0, 1).ToUpper()</div>
-            <span class="topbar-username">@User.Identity.Name</span>
-          </div>
-        </header>
-
-        <!-- Main content -->
-        <main class="page-main">
-          @RenderBody()
-        </main>
-
-        <!-- Footer -->
-        <footer class="app-footer">
-          &copy; @DateTime.Now.Year ShieldInsure &mdash; Secure Enterprise Claims Platform
-        </footer>
-
-      </div>
-      <!-- ────────── END PAGE CONTENT ────────── -->
-
-    </div>
-    <!-- ── END AUTHENTICATED SHELL ── -->
-}
-else
-{
-    <!-- ── PUBLIC SHELL ── -->
-    <nav class="navbar navbar-expand-lg navbar-dark public-navbar fixed-top" style="padding: 10px 0;">
-      <div class="container">
-        <a class="navbar-brand" asp-controller="Home" asp-action="Index">
-          <div class="public-nav-logo">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 2L3 6v6c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V6l-9-4zm-1 13l-3-3 1.41-1.41L11 12.17l4.59-4.58L17 9l-6 6z"/>
-            </svg>
-          </div>
-          <span>Shield<span style="color:#38bdf8;">Insure</span></span>
-        </a>
-        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse"
-                data-bs-target="#publicNav" aria-controls="publicNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-center" id="publicNav">
-          <ul class="navbar-nav fw-medium gap-1 my-2 my-lg-0">
-            <li class="nav-item"><a class="nav-link nav-link-glass" href="#home">Home</a></li>
-            <li class="nav-item"><a class="nav-link nav-link-glass" href="#features">Why Us</a></li>
-            <li class="nav-item"><a class="nav-link nav-link-glass" href="#how-it-works">Process</a></li>
-            <li class="nav-item"><a class="nav-link nav-link-glass" href="#faq">FAQ</a></li>
-            <li class="nav-item"><a class="nav-link nav-link-glass" href="#contact">Contact</a></li>
-          </ul>
-        </div>
-        <div class="d-none d-lg-flex gap-2 align-items-center">
-          <a href="/Auth/Login" class="btn btn-sm fw-700 rounded-pill px-4 py-2"
-             style="background:rgba(56,189,248,0.12);border:1.5px solid rgba(56,189,248,0.4);color:#38bdf8;font-size:.85rem;">
-            Sign In <i class="fa-solid fa-arrow-right ms-1"></i>
-          </a>
-        </div>
-      </div>
-    </nav>
-
-    <main role="main">@RenderBody()</main>
-
-    <footer class="public-footer text-center">
-      <div class="container">
-        <a asp-controller="Home" asp-action="Index" class="auth-brand mb-3 d-inline-flex">
-          <div class="auth-logo">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 2L3 6v6c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V6l-9-4zm-1 13l-3-3 1.41-1.41L11 12.17l4.59-4.58L17 9l-6 6z"/>
-            </svg>
-          </div>
-          <span class="auth-brand-name">Shield<em>Insure</em></span>
-        </a>
-        <p class="text-muted mb-0 mt-2" style="font-size:.8125rem;">
-          &copy; @DateTime.Now.Year ShieldInsure. All rights reserved.
-        </p>
-      </div>
-    </footer>
-    <!-- ── END PUBLIC SHELL ── -->
-}
-
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="~/js/site.js" asp-append-version="true"></script>
-<script>
-  (function () {
-    var wrapper  = document.getElementById('wrapper');
-    var toggle   = document.getElementById('menuToggle');
-    var overlay  = document.getElementById('sidebarOverlay');
-    var isMobile = window.innerWidth < 1024;
-
-    // Desktop: start open; Mobile: start closed
-    if (wrapper) {
-      if (!isMobile) wrapper.classList.remove('toggled');
-      else wrapper.classList.add('toggled');
+        <!-- ── END AUTHENTICATED SHELL ── -->
     }
-
-    if (toggle) {
-      toggle.addEventListener('click', function () {
-        if (wrapper) {
-          wrapper.classList.toggle('toggled');
-          var expanded = !wrapper.classList.contains('toggled');
-          toggle.setAttribute('aria-expanded', expanded);
+    else
+    {
+        <!-- ── PUBLIC SHELL ── -->
+        @if (!(ViewData["HideNavbar"] as bool? ?? false))
+        {
+            <nav class="navbar navbar-expand-lg navbar-dark public-navbar fixed-top" style="padding: 10px 0;">
+                <div class="container">
+                    <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                        <div class="public-nav-logo">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2L3 6v6c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V6l-9-4zm-1 13l-3-3 1.41-1.41L11 12.17l4.59-4.58L17 9l-6 6z" />
+                            </svg>
+                        </div>
+                        <span>Shield<span style="color:#38bdf8;">Insure</span></span>
+                    </a>
+                    <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#publicNav" aria-controls="publicNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-center" id="publicNav">
+                        <ul class="navbar-nav fw-medium gap-1 my-2 my-lg-0">
+                            <li class="nav-item"><a class="nav-link nav-link-glass" href="#home">Home</a></li>
+                            <li class="nav-item"><a class="nav-link nav-link-glass" href="#features">Why Us</a></li>
+                            <li class="nav-item"><a class="nav-link nav-link-glass" href="#how-it-works">Process</a></li>
+                            <li class="nav-item"><a class="nav-link nav-link-glass" href="#faq">FAQ</a></li>
+                            <li class="nav-item"><a class="nav-link nav-link-glass" href="#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="d-none d-lg-flex gap-2 align-items-center">
+                        <a href="/Auth/Login" class="btn btn-sm fw-700 rounded-pill px-4 py-2"
+                           style="background:rgba(56,189,248,0.12);border:1.5px solid rgba(56,189,248,0.4);color:#38bdf8;font-size:.85rem;">
+                            Sign In <i class="fa-solid fa-arrow-right ms-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </nav>
         }
-      });
-    }
-    if (overlay) {
-      overlay.addEventListener('click', function () {
-        if (wrapper) wrapper.classList.add('toggled');
-      });
-    }
 
-    // Highlight active nav
-    var links = document.querySelectorAll('.sidebar-link');
-    var path  = window.location.pathname.toLowerCase();
-    links.forEach(function (l) {
-      var href = (l.getAttribute('href') || '').toLowerCase();
-      if (href && path === href) l.classList.add('active');
-    });
-  })();
-</script>
-@await RenderSectionAsync("Scripts", required: false)
+        <main role="main">@RenderBody()</main>
+
+        <footer class="public-footer text-center">
+            <div class="container">
+                <a asp-controller="Home" asp-action="Index" class="auth-brand mb-3 d-inline-flex">
+                    <div class="auth-logo">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L3 6v6c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V6l-9-4zm-1 13l-3-3 1.41-1.41L11 12.17l4.59-4.58L17 9l-6 6z" />
+                        </svg>
+                    </div>
+                    <span class="auth-brand-name">Shield<em>Insure</em></span>
+                </a>
+                <p class="text-muted mb-0 mt-2" style="font-size:.8125rem;">
+                    &copy; @DateTime.Now.Year ShieldInsure. All rights reserved.
+                </p>
+            </div>
+        </footer>
+        <!-- ── END PUBLIC SHELL ── -->
+    }
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+            (function() {
+                var wrapper = document.getElementById('wrapper');
+                var toggle = document.getElementById('menuToggle');
+                var overlay = document.getElementById('sidebarOverlay');
+                var isMobile = window.innerWidth < 1024;
+
+                // Desktop: start open; Mobile: start closed
+                if (wrapper) {
+                    if (!isMobile) wrapper.classList.remove('toggled');
+                    else wrapper.classList.add('toggled');
+                }
+
+                if (toggle) {
+                    toggle.addEventListener('click', function() {
+                        if (wrapper) {
+                            wrapper.classList.toggle('toggled');
+                            var expanded = !wrapper.classList.contains('toggled');
+                            toggle.setAttribute('aria-expanded', expanded);
+                        }
+                    });
+                }
+                if (overlay) {
+                    overlay.addEventListener('click', function() {
+                        if (wrapper) wrapper.classList.add('toggled');
+                    });
+                }
+
+                // Highlight active nav
+                var links = document.querySelectorAll('.sidebar-link');
+                var path = window.location.pathname.toLowerCase();
+                links.forEach(function(l) {
+                    var href = (l.getAttribute('href') || '').toLowerCase();
+                    if (href && path === href) l.classList.add('active');
+                });
+            })();
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -2,69 +2,78 @@
     ViewData["HideNavbar"] = true;
 }
 @model Final_Insure.DTOs.UserLoginDTO
-@{ ViewData["Title"] = "Customer Sign In"; Layout = "~/Views/Shared/_Layout.cshtml"; }
+@{
+    ViewData["Title"] = "Customer Sign In"; Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
 <div class="auth-page">
-  <div style="width:100%;max-width:440px;">
+    <div>
 
-    <!-- Brand -->
-    <div class="text-center mb-5">
-      <a asp-controller="Home" asp-action="Index" class="auth-brand justify-content-center">
-        <div class="auth-logo">
-          <svg viewBox="0 0 24 24"><path d="M12 2L3 6v6c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V6l-9-4zm-1 13l-3-3 1.41-1.41L11 12.17l4.59-4.58L17 9l-6 6z"/></svg>
+        <!-- Brand -->
+        <div class="text-center mb-4">
+            <a asp-controller="Home" asp-action="Index" class="auth-brand justify-content-center">
+                <div class="auth-logo">
+                    <svg viewBox="0 0 24 24"><path d="M12 2L3 6v6c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V6l-9-4zm-1 13l-3-3 1.41-1.41L11 12.17l4.59-4.58L17 9l-6 6z" /></svg>
+                </div>
+                <span class="auth-brand-name">Shield<em>Insure</em></span>
+            </a>
+            <p style="color:rgba(255,255,255,.4);font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-top:8px;">SECURE CUSTOMER PORTAL</p>
         </div>
-        <span class="auth-brand-name">Shield<em>Insure</em></span>
-      </a>
-      <p style="color:rgba(255,255,255,.4);font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-top:8px;">SECURE CUSTOMER PORTAL</p>
+
+        <div class="auth-card">
+
+            <!-- ADDED text-center HERE -->
+            <div class="text-center">
+                <h4 class="fw-800 mb-1" style="font-size:1.15rem;letter-spacing:-.4px;">Welcome back</h4>
+                <p class="text-muted mb-3" style="font-size:.85rem;">Enter your credentials to manage your policies.</p>
+            </div>
+
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div class="alert alert-danger mb-3 py-2 px-3">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <span>Invalid email or password.</span>
+                </div>
+            }
+
+            <form asp-controller="Auth" asp-action="Login" method="post">
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label">Email Address</label>
+                    <div class="input-wrap">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input asp-for="Email" type="email" class="form-control" placeholder="name@example.com" required />
+                    </div>
+                    <span asp-validation-for="Email" class="text-danger small d-block mt-1"></span>
+                </div>
+
+                <div class="mb-4">
+                    <label asp-for="Password" class="form-label">Password</label>
+                    <div class="input-wrap">
+                        <i class="fa-solid fa-lock"></i>
+                        <input asp-for="Password" type="password" class="form-control" placeholder="••••••••" required />
+                    </div>
+                    <span asp-validation-for="Password" class="text-danger small d-block mt-1"></span>
+                </div>
+
+                <!-- ADDED justify-content-center HERE -->
+                <button type="submit" class="btn btn-brand w-100 justify-content-center" style="padding:10px;font-size:.9rem;">
+                    Sign In <i class="fa-solid fa-arrow-right ms-1"></i>
+                </button>
+            </form>
+
+            <div class="text-center mt-3 pt-3" style="border-top:1px solid var(--border);">
+                <p class="text-muted mb-0" style="font-size:.85rem;">
+                    Don't have an account?
+                    <a asp-controller="Auth" asp-action="Register" class="fw-700 text-decoration-none" style="color:var(--brand-primary);">Register Now</a>
+                </p>
+            </div>
+        </div>
+
+        <div class="text-center mt-3">
+            <a asp-controller="Home" asp-action="Index" style="color:rgba(255,255,255,.35);font-size:.8125rem;font-weight:600;text-decoration:none;">
+                <i class="fa-solid fa-arrow-left me-1"></i> Back to Homepage
+            </a>
+        </div>
+
     </div>
-
-    <div class="auth-card">
-      <h4 class="fw-800 mb-1" style="letter-spacing:-.4px;">Welcome back</h4>
-      <p class="text-muted mb-4" style="font-size:.875rem;">Enter your credentials to manage your policies and claims.</p>
-
-      @if (!ViewData.ModelState.IsValid)
-      {
-        <div class="alert alert-danger mb-4">
-          <i class="fa-solid fa-triangle-exclamation"></i>
-          <span>Invalid email or password. Please check your credentials.</span>
-        </div>
-      }
-
-      <form asp-controller="Auth" asp-action="Login" method="post">
-        <div class="mb-4">
-          <label asp-for="Email" class="form-label">Email Address</label>
-          <div class="input-wrap">
-            <i class="fa-solid fa-envelope"></i>
-            <input asp-for="Email" type="email" class="form-control" placeholder="name@example.com" required />
-          </div>
-          <span asp-validation-for="Email" class="text-danger small d-block mt-1"></span>
-        </div>
-        <div class="mb-5">
-          <label asp-for="Password" class="form-label">Password</label>
-          <div class="input-wrap">
-            <i class="fa-solid fa-lock"></i>
-            <input asp-for="Password" type="password" class="form-control" placeholder="••••••••" required />
-          </div>
-          <span asp-validation-for="Password" class="text-danger small d-block mt-1"></span>
-        </div>
-        <button type="submit" class="btn btn-brand w-100" style="padding:13px;font-size:.9375rem;">
-          Sign In <i class="fa-solid fa-arrow-right ms-1"></i>
-        </button>
-      </form>
-
-      <div class="text-center mt-4 pt-4" style="border-top:1px solid var(--border);">
-        <p class="text-muted mb-0" style="font-size:.875rem;">
-          Don't have an account?
-          <a asp-controller="Auth" asp-action="Register" class="fw-700 text-decoration-none" style="color:var(--brand-primary);">Register Now</a>
-        </p>
-      </div>
-    </div>
-
-    <div class="text-center mt-4">
-      <a asp-controller="Home" asp-action="Index" style="color:rgba(255,255,255,.35);font-size:.8125rem;font-weight:600;text-decoration:none;">
-        <i class="fa-solid fa-arrow-left me-1"></i> Back to Homepage
-      </a>
-    </div>
-
-  </div>
 </div>

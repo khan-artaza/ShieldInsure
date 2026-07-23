@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ShieldInsure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+de1d14181008c42a8177e7b6a352ade8e99effb7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+576a00217d4a81bae2a407be6cdd77d3aedf8c87")]
 [assembly: System.Reflection.AssemblyProductAttribute("ShieldInsure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ShieldInsure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

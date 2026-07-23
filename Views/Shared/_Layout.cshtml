@@ -84,10 +84,14 @@
                     @RenderBody()
                 </main>
 
-                <!-- Footer -->
-                <footer class="app-footer">
-                    &copy; @DateTime.Now.Year ShieldInsure &mdash; Secure Enterprise Claims Platform
-                </footer>
+                <!-- APP FOOTER CHECK ADDED HERE -->
+                @if (!(ViewData["HideNavbar"] as bool? ?? false))
+                {
+                    <!-- Footer -->
+                    <footer class="app-footer">
+                        &copy; @DateTime.Now.Year ShieldInsure &mdash; Secure Enterprise Claims Platform
+                    </footer>
+                }
 
             </div>
             <!-- ────────── END PAGE CONTENT ────────── -->
@@ -135,23 +139,28 @@
 
         <main role="main">@RenderBody()</main>
 
-        <footer class="public-footer text-center">
-            <div class="container">
-                <a asp-controller="Home" asp-action="Index" class="auth-brand mb-3 d-inline-flex">
-                    <div class="auth-logo">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2L3 6v6c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V6l-9-4zm-1 13l-3-3 1.41-1.41L11 12.17l4.59-4.58L17 9l-6 6z" />
-                        </svg>
-                    </div>
-                    <span class="auth-brand-name">Shield<em>Insure</em></span>
-                </a>
-                <p class="text-muted mb-0 mt-2" style="font-size:.8125rem;">
-                    &copy; @DateTime.Now.Year ShieldInsure. All rights reserved.
-                </p>
-            </div>
-        </footer>
+        <!-- PUBLIC FOOTER CHECK ADDED HERE -->
+        @if (!(ViewData["HideNavbar"] as bool? ?? false))
+        {
+            <footer class="public-footer text-center">
+                <div class="container">
+                    <a asp-controller="Home" asp-action="Index" class="auth-brand mb-3 d-inline-flex">
+                        <div class="auth-logo">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2L3 6v6c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V6l-9-4zm-1 13l-3-3 1.41-1.41L11 12.17l4.59-4.58L17 9l-6 6z" />
+                            </svg>
+                        </div>
+                        <span class="auth-brand-name">Shield<em>Insure</em></span>
+                    </a>
+                    <p class="text-muted mb-0 mt-2 text-white-50" style="font-size:.8125rem;">
+                        &copy; @DateTime.Now.Year ShieldInsure. All rights reserved.
+                    </p>
+                </div>
+            </footer>
+        }
         <!-- ── END PUBLIC SHELL ── -->
     }
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

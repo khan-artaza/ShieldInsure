@@ -168,6 +168,15 @@ namespace Final_Insure.Controllers
             return View(user);
         }
 
+
+
+        // GET: Show Staff Login Page
+        [HttpGet]
+        public IActionResult StaffLogin()
+        {
+            return View();
+        }
+
         // 2. POST: Securely Log Out
         [HttpPost]
         public async Task<IActionResult> Logout()
@@ -176,15 +185,7 @@ namespace Final_Insure.Controllers
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
             // Redirect back to the login page
-            return RedirectToAction("Login", "Auth");
-        }
-
-
-        // GET: Show Staff Login Page
-        [HttpGet]
-        public IActionResult StaffLogin()
-        {
-            return View();
+            return RedirectToAction("StaffLogin", "Auth");
         }
     }
 }

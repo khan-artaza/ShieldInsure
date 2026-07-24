@@ -143,12 +143,20 @@ namespace Final_Insure.Controllers
 
             int customerId = GetCurrentUserId();
 
-            // Create the actual policy receipt
+            // Use the selected policy template created by Admin so the issued policy preserves the Admin-defined PolicyNumber
+            var template = await _context.Policies.FindAsync(dto.PlanId);
+            if (template == null)
+            {
+                ModelState.AddModelError(string.Empty, "Selected policy template could not be found.");
+                return View(dto);
+            }
+
+            // Create the actual policy receipt copying the admin-defined policy number and type from the template
             var policy = new Policy
             {
                 CustomerId = customerId,
-                PolicyNumber = "POL-" + DateTime.Now.Ticks.ToString().Substring(8, 6), // Generate a random policy number
-                PolicyType = "Vehicle",
+                PolicyNumber = template.PolicyNumber,
+                PolicyType = template.PolicyType,
                 CoverageAmount = dto.CoverageAmount,
                 PremiumAmount = dto.PremiumAmount,
                 StartDate = DateTime.UtcNow,

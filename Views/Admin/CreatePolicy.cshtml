@@ -5,8 +5,8 @@
 
 <div class="d-flex justify-content-center">
     <!-- STRICT COMPACT CONTAINER -->
-    <div style="width: 100%; max-width: 600px; ">
-        <div class="card border-0 shadow-sm" style="border-radius: 10px; overflow: hidden; background: #fff; width:80%">
+    <div style="width: 100%; max-width: 600px; margin: 0 auto;">
+        <div class="card border-0 shadow-sm" style="border-radius: 10px; overflow: hidden; background: #fff;">
 
             <!-- Scaled down header -->
             <div class="text-white d-flex align-items-center" style="background: linear-gradient(135deg, #0c387a, #1856b5); padding: 15px 16px;">
@@ -18,6 +18,7 @@
             <!-- Tighter padding inside the card -->
             <div class="card-body" style="padding: 16px 20px;">
                 <form asp-action="CreatePolicy" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
                     <input type="hidden" asp-for="Status" value="Active" />
 
                     <!-- Using gx-2 to reduce horizontal gap between columns -->

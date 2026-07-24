@@ -496,6 +496,7 @@ a {
     border-bottom: 1px solid var(--border);
     display: flex;
     align-items: center;
+    justify-content:space-between;
     padding: 0 22px;
     gap: 12px;
     position: sticky;
@@ -644,6 +645,61 @@ a {
     z-index: 1039;
     backdrop-filter: blur(3px);
     -webkit-backdrop-filter: blur(3px);
+}
+
+/* Responsive behaviour: collapse sidebar on smaller screens and enable overlay */
+@media (max-width: 991.98px) {
+    /* Hide sidebar by default on mobile/tablet */
+    #sidebar-wrapper {
+        transform: translateX(calc(-1 * var(--sidebar-w)));
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100vh;
+        z-index: 1050;
+        box-shadow: 0 8px 30px rgba(2,6,23,0.6);
+        transition: transform 0.32s var(--ease);
+    }
+
+    /* When wrapper has toggled class, reveal the sidebar */
+    #wrapper.toggled #sidebar-wrapper {
+        transform: translateX(0);
+    }
+
+    /* Page content should take full width by default on small screens */
+    #page-content-wrapper {
+        margin-left: 0 !important;
+    }
+
+    /* Show overlay element but keep it invisible until toggled */
+    .sidebar-overlay {
+        display: block;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease;
+    }
+
+    /* When sidebar is visible, enable overlay interactions */
+    #wrapper.toggled .sidebar-overlay {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    /* Slightly reduce sidebar width on smaller viewports to avoid covering too much */
+    #sidebar-wrapper {
+        width: 220px;
+        min-width: 220px;
+    }
+
+    /* Ensure topbar elements wrap and remain usable */
+    .topbar-title { display: inline-block; max-width: 60%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .topbar-user { display: none; }
+}
+
+@media (max-width: 575.98px) {
+    /* On very small screens make the sidebar full height but keep width smaller */
+    #sidebar-wrapper { width: 200px; min-width: 200px; }
+    .topbar-title { max-width: 50%; }
 }
 
 

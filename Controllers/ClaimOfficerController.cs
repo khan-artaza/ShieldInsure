@@ -13,17 +13,20 @@ namespace Final_Insure.Controllers
     {
         private readonly IClaimRepository _claimRepo;
         private readonly IUserRepository _userRepo;
+        private readonly IClaimDocumentRepository _docRepo;
         private readonly IClaimService _claimService;
         private readonly IAssessmentRepository _assessmentRepo;
 
         public ClaimOfficerController(
             IClaimRepository claimRepo,
             IUserRepository userRepo,
+            IClaimDocumentRepository docRepo,
             IClaimService claimService,
             IAssessmentRepository assessmentRepo)
         {
             _claimRepo = claimRepo;
             _userRepo = userRepo;
+            _docRepo = docRepo;
             _claimService = claimService;
             _assessmentRepo = assessmentRepo;
         }
@@ -111,6 +114,34 @@ namespace Final_Insure.Controllers
             await _claimService.ProcessFinalSettlementAsync(dto);
 
             TempData["SuccessMessage"] = $"Claim has been {dto.FinalStatus}!";
+            return RedirectToAction("Dashboard");
+        }
+
+        // 6. POST: Update a specific document's verification status (Verified / Rejected)
+        [HttpPost]
+        public async Task<IActionResult> UpdateDocumentStatus(int documentId, VerificationStatus status)
+        {
+            var doc = await _docRepo.GetByIdAsync(documentId);
+            if (doc == null) return NotFound();
+
+            doc.VerificationStatus = status;
+            await _docRepo.UpdateAsync(doc);
+
+            TempData["SuccessMessage"] = "Document status updated.";
+            return RedirectToAction("ProcessSettlement", new { claimId = doc.ClaimId });
+        }
+
+        // 7. POST: Reject a claim immediately (used when documents are invalid)
+        [HttpPost]
+        public async Task<IActionResult> RejectClaim(int claimId, string? reason)
+        {
+            var claim = await _claimRepo.GetByIdAsync(claimId);
+            if (claim == null) return NotFound();
+
+            claim.ClaimStatus = ClaimStatus.Rejected;
+            await _claimRepo.UpdateAsync(claim);
+
+            TempData["ErrorMessage"] = "Claim has been rejected due to invalid documentation.";
             return RedirectToAction("Dashboard");
         }
 

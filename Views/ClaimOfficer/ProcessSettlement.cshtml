@@ -52,6 +52,43 @@
                             <p class="text-muted mb-1" style="font-size:.78rem; font-weight:700; text-transform:uppercase;">Customer Statement</p>
                             <p class="p-3 rounded-3 border mb-0" style="background:#f8fafc; font-size:.875rem;">@claim?.Description</p>
                         </div>
+
+                <!-- Uploaded Documents -->
+                <div class="col-12 mt-3">
+                    <p class="text-muted mb-2" style="font-size:.78rem; font-weight:700; text-transform:uppercase;">Uploaded Documents</p>
+                    @if (claim?.ClaimDocuments != null && claim.ClaimDocuments.Any())
+                    {
+                        <div class="list-group">
+                        @foreach (var doc in claim.ClaimDocuments)
+                        {
+                            <div class="list-group-item d-flex align-items-center justify-content-between">
+                                <div>
+                                    <div class="fw-700">@doc.DocumentName</div>
+                                    <small class="text-muted">Uploaded: @doc.UploadedAt.ToString("g")</small>
+                                </div>
+                                <div class="d-flex align-items-center gap-2">
+                                    <a class="btn btn-sm btn-outline-primary" target="_blank" href="@doc.FilePath">View</a>
+                                    <span class="badge rounded-pill" style="background:#f1f5f9;color:#0f172a;">@doc.VerificationStatus</span>
+                                    <form method="post" asp-action="UpdateDocumentStatus" class="d-inline">
+                                        <input type="hidden" name="documentId" value="@doc.DocumentId" />
+                                        <input type="hidden" name="status" value="Verified" />
+                                        <button type="submit" class="btn btn-sm btn-success">Mark Verified</button>
+                                    </form>
+                                    <form method="post" asp-action="UpdateDocumentStatus" class="d-inline">
+                                        <input type="hidden" name="documentId" value="@doc.DocumentId" />
+                                        <input type="hidden" name="status" value="Rejected" />
+                                        <button type="submit" class="btn btn-sm btn-danger">Mark Rejected</button>
+                                    </form>
+                                </div>
+                            </div>
+                        }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-muted">No documents uploaded for this claim.</div>
+                    }
+                </div>
                     </div>
                 </div>
 
@@ -122,6 +159,7 @@
                 </div>
 
                 <form asp-action="ProcessSettlement" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
                     <input type="hidden" asp-for="ClaimId" />
 
                     <div class="mb-4">
@@ -137,18 +175,20 @@
                     </div>
 
                     <div class="mb-4">
-                        <label class="form-label">Final Verdict <span class="text-danger">*</span></label>
-                        <select name="FinalStatus" class="form-select fw-700" required>
+                        <label asp-for="FinalStatus" class="form-label">Final Verdict <span class="text-danger">*</span></label>
+                        <select asp-for="FinalStatus" class="form-select fw-700" required>
                             <option value="">— Select Decision —</option>
                             <option value="Settled" class="text-success">Approve &amp; Issue Payment</option>
                             <option value="Rejected" class="text-danger">Reject Claim</option>
                         </select>
+                        <span asp-validation-for="FinalStatus" class="text-danger" style="font-size:.8rem;"></span>
                     </div>
 
                     <div class="mb-4">
-                        <label class="form-label">Final Authorization Remarks</label>
-                        <textarea name="OfficerRemarks" class="form-control" rows="3"
+                        <label asp-for="Remarks" class="form-label">Final Authorization Remarks</label>
+                        <textarea asp-for="Remarks" class="form-control" rows="3"
                                   placeholder="Add any final notes for the permanent record..."></textarea>
+                        <span asp-validation-for="Remarks" class="text-danger" style="font-size:.8rem;"></span>
                     </div>
 
                     <button type="submit" class="btn btn-brand w-100 fw-bold py-3">

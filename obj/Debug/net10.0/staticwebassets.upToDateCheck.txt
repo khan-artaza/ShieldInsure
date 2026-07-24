@@ -1,4 +1,3 @@
-wwwroot\css\site.css
 wwwroot\favicon.ico
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
@@ -61,14 +60,17 @@ wwwroot\lib\jquery\dist\jquery.slim.js
 wwwroot\lib\jquery\dist\jquery.slim.min.js
 wwwroot\lib\jquery\dist\jquery.slim.min.map
 wwwroot\lib\jquery\LICENSE.txt
+wwwroot\uploads\claims\0b609003-8b83-46b6-b4cb-8b4dc9af3340_herolib.jpg
 wwwroot\uploads\claims\0e27fe4b-28f8-4fa3-ad22-670dee03d6ab_Screenshot 2026-06-10 023813.png
 wwwroot\uploads\claims\0e32ca3b-a84c-40a7-9234-36ed5f79446e_Screenshot 2026-05-13 023925.png
 wwwroot\uploads\claims\0e3ad125-e0bb-4a1c-b015-5d60a131a8b2_Screenshot 2026-05-13 053540.png
 wwwroot\uploads\claims\148219dd-6b5b-416a-a86b-3e98bbad484f_GodanCoverImage.jpg
+wwwroot\uploads\claims\21e77b03-974f-4a58-80c3-4c59885a1524_NarniaBookCover.jpg
 wwwroot\uploads\claims\2a0a219e-f775-486c-a824-4a84c5d6c61c_Screenshot 2026-05-05 204638.png
 wwwroot\uploads\claims\4a4aa457-ca94-494e-b988-c10af07de122_Screenshot 2026-05-13 053540.png
 wwwroot\uploads\claims\625c156f-0669-405a-8a86-70f98674888d_wlppr.webp
 wwwroot\uploads\claims\6306cbb5-9c54-4de5-b807-90cf1c07af4e_Screenshot 2026-05-16 093601.png
+wwwroot\uploads\claims\6de4eda2-b45b-4fcd-8463-05ea8a33472a_NarniaBookCover.jpg
 wwwroot\uploads\claims\711dc5b1-df19-484e-9ab5-6cdec9497571_NarniaBookCover.jpg
 wwwroot\uploads\claims\74a498c6-569d-4dae-a605-979a75279bad_Screenshot 2026-05-11 203512.png
 wwwroot\uploads\claims\767630f2-e621-4da1-a33a-3170305a4ca0_Screenshot 2026-05-05 204638.png
@@ -79,14 +81,18 @@ wwwroot\uploads\claims\89a9216b-1cf7-4f89-bd1f-f644e6f056ed_Screenshot 2026-05-0
 wwwroot\uploads\claims\93fd1839-7a62-4321-80aa-d9c101920a3d_Screenshot 2026-05-05 204638.png
 wwwroot\uploads\claims\94679279-b13f-4267-a653-be0ac2404744_Screenshot 2026-05-05 204638.png
 wwwroot\uploads\claims\a2de6f3a-f0bb-4020-81ff-198ed0c6c848_Screenshot 2026-05-13 053310.png
+wwwroot\uploads\claims\b05b63aa-f2b2-4460-875f-6720655647cc_NarniaBookCover.jpg
 wwwroot\uploads\claims\b79a9c18-c182-452a-a212-744135bdc205_Screenshot 2026-05-13 050123.png
 wwwroot\uploads\claims\b82e46fa-e3d9-4eb3-99bf-d6f75722ad8d_Screenshot 2026-05-05 204638.png
 wwwroot\uploads\claims\ba3ab589-b4b9-41fb-ba5f-38e0486ad038_Screenshot 2026-05-13 053540.png
 wwwroot\uploads\claims\c28e7f2f-a723-429f-b48e-71f23f303480_Document.pdf
+wwwroot\uploads\claims\d7b169d7-3730-4ff9-af83-4c493ea6ae8f_NarniaBookCover.jpg
+wwwroot\uploads\claims\d7ef30e7-4a6f-4d86-90dc-6a15c661b4c0_herolib.jpg
 wwwroot\uploads\claims\d8b1ac40-e8f3-42f5-b7cb-2a86ab3d8054_Screenshot 2026-05-11 095018.png
 wwwroot\uploads\claims\d921efc9-bce0-445e-b3c8-6c8fcd8a543b_Screenshot 2026-05-05 204638.png
 wwwroot\uploads\claims\e7c092aa-eef1-4489-9a8f-f740811943c0_Screenshot 2026-05-11 203512.png
 wwwroot\uploads\claims\ed81e408-5d50-4c82-b9de-4a09a0c210a7_Screenshot 2026-05-11 203512.png
+wwwroot\css\site.css
 C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\favicon.ico
 C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\js\site.js
 C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css

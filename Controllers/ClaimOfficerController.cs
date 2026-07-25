@@ -77,6 +77,47 @@ namespace Final_Insure.Controllers
             return RedirectToAction("Dashboard");
         }
 
+        // =========================================================================
+        // NEW: 3A. GET: View Documents before assignment
+        // =========================================================================
+        [HttpGet]
+        public async Task<IActionResult> ViewDocuments(int claimId)
+        {
+            var claim = await _claimRepo.GetByIdAsync(claimId);
+            if (claim == null) return NotFound();
+
+            // Return the claim to a view so the officer can see the attached docs.
+            // Note: Make sure your GetByIdAsync method Includes the ClaimDocuments.
+            return View(claim);
+        }
+
+        // =========================================================================
+        // NEW: 3B. POST: Reject claim due to bad documents
+        // =========================================================================
+        [HttpPost]
+        public async Task<IActionResult> RejectInvalidDocs(int ClaimId, string Reason)
+        {
+            if (ClaimId <= 0 || string.IsNullOrEmpty(Reason))
+            {
+                TempData["ErrorMessage"] = "Invalid request.";
+                return RedirectToAction("Dashboard");
+            }
+
+            var claim = await _claimRepo.GetByIdAsync(ClaimId);
+            if (claim == null) return NotFound();
+
+            // Set the remarks explaining why it was rejected
+            claim.OfficerRemarks = Reason + " - Docs are inappropriate, please file a new claim with correct docs.";
+
+            // Completely reject the claim instead of waiting for re-upload
+            claim.ClaimStatus = ClaimStatus.Rejected;
+
+            await _claimRepo.UpdateAsync(claim);
+
+            TempData["SuccessMessage"] = $"Claim #{ClaimId} rejected due to inappropriate documents. The customer must file a new claim.";
+            return RedirectToAction("Dashboard");
+        }
+
         // 4. GET: Form for final approval/rejection
         [HttpGet]
         public async Task<IActionResult> ProcessSettlement(int claimId)

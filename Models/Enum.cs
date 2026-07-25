@@ -11,15 +11,18 @@
 
     public enum ClaimStatus
     {
-        Registered,            // Brand new claim
-        Assigned,
-        UnderAssessment,
-        PendingSurvey,         // Waiting on Surveyor
-        PendingCompliance,     // Waiting on Compliance Officer
-        PendingFinalApproval,  // Back on Claim Officer's desk
-        Approved,
-        Rejected,
-        Settled
+        Registered,            // 0: Brand new claim
+        Assigned,              // 1
+        UnderAssessment,       // 2
+        PendingSurvey,         // 3: Waiting on Surveyor
+        PendingCompliance,     // 4: Waiting on Compliance Officer
+        PendingFinalApproval,  // 5: Back on Claim Officer's desk
+        Approved,              // 6
+        Rejected,              // 7
+        Settled,               // 8
+
+        // ADD NEW STATUSES AT THE END TO PREVENT DATABASE CORRUPTION
+        AwaitingDocuments      // 9: Waiting on customer to re-upload docs
     }
 
     public enum VerificationStatus

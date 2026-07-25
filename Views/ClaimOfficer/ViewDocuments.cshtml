@@ -1,0 +1,35 @@
+﻿@model Final_Insure.Models.Claim
+
+@{
+    ViewData["Title"] = "View Documents";
+}
+
+<div class="container mt-4">
+    <h2>Documents for Claim #@Model.ClaimId</h2>
+    <hr />
+
+    <div class="row">
+        @if (Model.ClaimDocuments != null && Model.ClaimDocuments.Any())
+        {
+            foreach (var doc in Model.ClaimDocuments)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">@doc.DocumentName</h5>
+                            <a href="@doc.FilePath" target="_blank" class="btn btn-outline-primary w-100">
+                                <i class="bi bi-file-earmark-image"></i> Open Document
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="alert alert-warning">No documents found for this claim.</div>
+        }
+    </div>
+
+    <a asp-action="Dashboard" class="btn btn-secondary mt-3">Back to Dashboard</a>
+</div>

@@ -222,6 +222,6 @@ C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\obj\Debug\net10.0\ref
 C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\obj\Debug\net10.0\ShieldInsure.pdb
 C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\obj\Debug\net10.0\ShieldInsure.genruntimeconfig.cache
 C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\obj\Debug\net10.0\ref\ShieldInsure.dll
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
 C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\obj\Debug\net10.0\compressed\2lfbqgqik4-{0}-5xxrkge6bv-5xxrkge6bv.gz
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\obj\Debug\net10.0\compressed\ptkpgzbz2l-{0}-yah1l16s5l-yah1l16s5l.gz
+C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\obj\Debug\net10.0\compressed\ptkpgzbz2l-{0}-23xe5a64vl-23xe5a64vl.gz
+C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt

@@ -10,6 +10,8 @@ namespace Final_Insure.Models
         [Required]
         public int PolicyId { get; set; }
 
+        public string? OfficerRemarks { get; set; }
+
         [Required]
         public int CustomerId { get; set; }
 

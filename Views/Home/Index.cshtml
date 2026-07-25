@@ -193,6 +193,15 @@
     text-decoration: none; transition: all .22s ease;
 }
 .contact-pill:hover { border-color: #0c387a; box-shadow: 0 4px 16px rgba(12,56,122,.1); transform: translateY(-2px); color: #0c387a; }
+
+@@media (max-width: 991.98px) {
+    .hero-stat-grid { margin-top: 0; }
+    .hero-mobile-stats { display: grid !important; }
+}
+
+@@media (min-width: 992px) {
+    .hero-mobile-stats { display: none !important; }
+}
 </style>
 
 <!-- ════════════════════════════════════════════════
@@ -228,17 +237,49 @@
                     </a>
                 </div>
 
-                <div class="d-flex align-items-center gap-3">
+                <div class="d-flex align-items-center gap-3 flex-wrap">
                     <a class="btn hero-btn-secondary" href="/Auth/StaffLogin" style="color:rgba(255,255,255,.4); font-size:.85rem; font-weight:600; text-decoration:none; transition: color .2s;"
                        onmouseover="this.style.color='rgba(255,255,255,.8)'" onmouseout="this.style.color='rgba(255,255,255,.4)'">
                         <i class="fa-solid fa-user-tie me-1"></i> Staff Portal →
                     </a>
-                    <span style="color:rgba(255,255,255,.15);">|</span>
+                    <span class="d-none d-sm-inline" style="color:rgba(255,255,255,.15);">|</span>
                     <div class="d-flex align-items-center gap-1">
                         @for (int i = 0; i < 5; i++) {
                             <i class="fa-solid fa-star" style="color:#fbbf24; font-size:.7rem;"></i>
                         }
                         <span style="color:rgba(255,255,255,.4); font-size:.78rem; font-weight:600; margin-left:4px;">4.9/5 (12k reviews)</span>
+                    </div>
+                </div>
+
+                <!-- Stat cards — visible on tablet & mobile -->
+                <div class="hero-stat-grid hero-mobile-stats d-lg-none mt-4">
+                    <div class="hero-stat-card">
+                        <div class="hero-stat-icon" style="background:rgba(56,189,248,.15);">
+                            <i class="fa-solid fa-bolt" style="color:#38bdf8;"></i>
+                        </div>
+                        <div class="hero-stat-value">Instant</div>
+                        <div class="hero-stat-label">Policy Issuance</div>
+                    </div>
+                    <div class="hero-stat-card">
+                        <div class="hero-stat-icon" style="background:rgba(16,185,129,.15);">
+                            <i class="fa-solid fa-clock-rotate-left" style="color:#10b981;"></i>
+                        </div>
+                        <div class="hero-stat-value">48 hrs</div>
+                        <div class="hero-stat-label">Avg. Settlement</div>
+                    </div>
+                    <div class="hero-stat-card">
+                        <div class="hero-stat-icon" style="background:rgba(245,158,11,.15);">
+                            <i class="fa-solid fa-users" style="color:#f59e0b;"></i>
+                        </div>
+                        <div class="hero-stat-value">150K+</div>
+                        <div class="hero-stat-label">Active Drivers</div>
+                    </div>
+                    <div class="hero-stat-card">
+                        <div class="hero-stat-icon" style="background:rgba(167,139,250,.15);">
+                            <i class="fa-solid fa-award" style="color:#a78bfa;"></i>
+                        </div>
+                        <div class="hero-stat-value">98.2%</div>
+                        <div class="hero-stat-label">Claim Ratio</div>
                     </div>
                 </div>
             </div>

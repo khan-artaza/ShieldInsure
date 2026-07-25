@@ -66,11 +66,15 @@ wwwroot\uploads\claims\0e27fe4b-28f8-4fa3-ad22-670dee03d6ab_Screenshot 2026-06-1
 wwwroot\uploads\claims\0e32ca3b-a84c-40a7-9234-36ed5f79446e_Screenshot 2026-05-13 023925.png
 wwwroot\uploads\claims\0e3ad125-e0bb-4a1c-b015-5d60a131a8b2_Screenshot 2026-05-13 053540.png
 wwwroot\uploads\claims\148219dd-6b5b-416a-a86b-3e98bbad484f_GodanCoverImage.jpg
+wwwroot\uploads\claims\16702b33-2ff3-4ae7-9f3a-b72f10bb963d_Screenshot 2026-05-14 121515.png
+wwwroot\uploads\claims\1b743fee-4fa6-4aab-8331-a9af54d93f32_Screenshot 2026-06-08 092810.png
 wwwroot\uploads\claims\21e77b03-974f-4a58-80c3-4c59885a1524_NarniaBookCover.jpg
 wwwroot\uploads\claims\2a0a219e-f775-486c-a824-4a84c5d6c61c_Screenshot 2026-05-05 204638.png
 wwwroot\uploads\claims\3349e30d-e0de-4412-a961-0500a7ef5d76_herolib.jpg
 wwwroot\uploads\claims\3422af8a-fdf1-4f15-82ec-ba4b3754c6b3_CurfewdNightCoverImage.webp
 wwwroot\uploads\claims\4a4aa457-ca94-494e-b988-c10af07de122_Screenshot 2026-05-13 053540.png
+wwwroot\uploads\claims\4b105023-bdc9-4f8e-a479-eb3cb663a955_Screenshot 2026-05-14 181733.png
+wwwroot\uploads\claims\5202db8e-f726-4378-9bfa-fb0b368fdc55_Screenshot 2026-06-05 095359.png
 wwwroot\uploads\claims\5bb6892f-ddf7-40b2-890d-50dedc19df4f_GodanCoverImage.jpg
 wwwroot\uploads\claims\625c156f-0669-405a-8a86-70f98674888d_wlppr.webp
 wwwroot\uploads\claims\6306cbb5-9c54-4de5-b807-90cf1c07af4e_Screenshot 2026-05-16 093601.png
@@ -80,12 +84,16 @@ wwwroot\uploads\claims\711dc5b1-df19-484e-9ab5-6cdec9497571_NarniaBookCover.jpg
 wwwroot\uploads\claims\74a498c6-569d-4dae-a605-979a75279bad_Screenshot 2026-05-11 203512.png
 wwwroot\uploads\claims\767630f2-e621-4da1-a33a-3170305a4ca0_Screenshot 2026-05-05 204638.png
 wwwroot\uploads\claims\771c5e5c-0335-4428-82ed-4c6d98151016_Screenshot 2026-05-11 095018.png
+wwwroot\uploads\claims\7804991b-07d4-4cd6-b4fe-1bc27796d23b_Screenshot 2026-05-19 145433.png
 wwwroot\uploads\claims\85a7b318-07b2-460c-a2bd-430cdc3df7ad_logo.png
 wwwroot\uploads\claims\8807ea4a-1d77-4f31-85b6-48daeda54c57_Screenshot 2026-05-13 054004.png
 wwwroot\uploads\claims\89a9216b-1cf7-4f89-bd1f-f644e6f056ed_Screenshot 2026-05-05 204638.png
 wwwroot\uploads\claims\93fd1839-7a62-4321-80aa-d9c101920a3d_Screenshot 2026-05-05 204638.png
 wwwroot\uploads\claims\94679279-b13f-4267-a653-be0ac2404744_Screenshot 2026-05-05 204638.png
+wwwroot\uploads\claims\9db23214-cd26-4fe2-a427-eb88b8ab88b4_Screenshot 2026-06-08 094153.png
 wwwroot\uploads\claims\a2de6f3a-f0bb-4020-81ff-198ed0c6c848_Screenshot 2026-05-13 053310.png
+wwwroot\uploads\claims\ad335309-a27e-4686-95c7-c43c91000150_Screenshot 2026-05-14 121515.png
+wwwroot\uploads\claims\af584929-7b4d-4a29-9980-0b0508d76cf1_Screenshot 2026-05-19 145433.png
 wwwroot\uploads\claims\b05b63aa-f2b2-4460-875f-6720655647cc_NarniaBookCover.jpg
 wwwroot\uploads\claims\b79a9c18-c182-452a-a212-744135bdc205_Screenshot 2026-05-13 050123.png
 wwwroot\uploads\claims\b82e46fa-e3d9-4eb3-99bf-d6f75722ad8d_Screenshot 2026-05-05 204638.png
@@ -98,66 +106,67 @@ wwwroot\uploads\claims\d7ef30e7-4a6f-4d86-90dc-6a15c661b4c0_herolib.jpg
 wwwroot\uploads\claims\d8b1ac40-e8f3-42f5-b7cb-2a86ab3d8054_Screenshot 2026-05-11 095018.png
 wwwroot\uploads\claims\d921efc9-bce0-445e-b3c8-6c8fcd8a543b_Screenshot 2026-05-05 204638.png
 wwwroot\uploads\claims\e7c092aa-eef1-4489-9a8f-f740811943c0_Screenshot 2026-05-11 203512.png
+wwwroot\uploads\claims\ebd91fd2-0221-4543-b4c4-9e626120a419_Screenshot 2026-05-25 120115.png
 wwwroot\uploads\claims\ed81e408-5d50-4c82-b9de-4a09a0c210a7_Screenshot 2026-05-11 203512.png
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\favicon.ico
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\jquery\dist\jquery.slim.min.map
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\jquery\dist\jquery.slim.min.js
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\jquery\dist\jquery.slim.js
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\jquery\dist\jquery.min.map
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\jquery\dist\jquery.min.js
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\jquery\dist\jquery.js
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\jquery-validation\LICENSE.md
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\jquery-validation\dist\jquery.validate.min.js
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\jquery-validation\dist\jquery.validate.js
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\jquery-validation\dist\additional-methods.min.js
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\jquery-validation\dist\additional-methods.js
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\jquery-validation-unobtrusive\dist\jquery.validate.unobtrusive.min.js
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\jquery-validation-unobtrusive\dist\jquery.validate.unobtrusive.js
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\js\bootstrap.js.map
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\js\bootstrap.js
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js.map
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js.map
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js.map
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css.map
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css.map
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap.min.css
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap.css.map
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap.css
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css.map
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css.map
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css.map
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css.map
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css.map
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css.map
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css.map
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css.map
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css.map
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css.map
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\css\site.css
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\js\site.js
-C:\Users\2506753\OneDrive - Cognizant\Desktop\ShieldInsure\wwwroot\lib\jquery\LICENSE.txt
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\js\site.js
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\favicon.ico
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css.map
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css.map
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css.map
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css.map
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css.map
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css.map
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css.map
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css.map
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css.map
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css.map
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap.css
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap.css.map
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap.min.css
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css.map
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css.map
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js.map
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js.map
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js.map
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\js\bootstrap.js
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\js\bootstrap.js.map
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\jquery-validation-unobtrusive\dist\jquery.validate.unobtrusive.js
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\jquery-validation-unobtrusive\dist\jquery.validate.unobtrusive.min.js
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\jquery-validation\dist\additional-methods.js
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\jquery-validation\dist\additional-methods.min.js
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\jquery-validation\dist\jquery.validate.js
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\jquery-validation\dist\jquery.validate.min.js
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\jquery-validation\LICENSE.md
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\jquery\dist\jquery.js
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\jquery\dist\jquery.min.js
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\jquery\dist\jquery.min.map
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\jquery\dist\jquery.slim.js
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\jquery\dist\jquery.slim.min.js
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\jquery\dist\jquery.slim.min.map
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\lib\jquery\LICENSE.txt
+C:\Users\artaz\OneDrive\Desktop\ShieldInsure\wwwroot\css\site.css

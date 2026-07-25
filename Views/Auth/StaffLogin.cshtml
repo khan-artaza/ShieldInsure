@@ -6,75 +6,69 @@
     ViewData["Title"] = "Staff Authentication"; Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!-- BULLETPROOF WRAPPER: Forces full screen, no scroll, centered content -->
-<div style="background: linear-gradient(140deg, #050b18 0%, #0c1a30 55%, #071222 100%); width: 100%; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; position: fixed; top: 0; left: 0; z-index: 9999; margin: 0; padding: 10px;">
+<div class="auth-page">
+    <div>
 
-    <!-- STRICT COMPACT CONTAINER -->
-    <div style="width: 100%; max-width: 340px;">
-
-        <!-- Scaled down header -->
-        <div class="text-center mb-3">
-            <a asp-controller="Home" asp-action="Index" class="d-inline-flex align-items-center gap-2 text-decoration-none">
-                <div style="width: 28px; height: 28px; background: linear-gradient(135deg, #1d4ed8, #38bdf8); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
-                    <svg viewBox="0 0 24 24" style="width: 14px; height: 14px; fill: #fff;"><path d="M12 2L3 6v6c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V6l-9-4zm-1 13l-3-3 1.41-1.41L11 12.17l4.59-4.58L17 9l-6 6z" /></svg>
+        <div class="text-center mb-4">
+            <a asp-controller="Home" asp-action="Index" class="auth-brand justify-content-center">
+                <div class="auth-logo">
+                    <svg viewBox="0 0 24 24"><path d="M12 2L3 6v6c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V6l-9-4zm-1 13l-3-3 1.41-1.41L11 12.17l4.59-4.58L17 9l-6 6z" /></svg>
                 </div>
-                <span class="fw-800 text-white" style="font-size: 1.05rem;">Shield<span style="color:#38bdf8;">Insure</span></span>
+                <span class="auth-brand-name">Shield<em>Insure</em></span>
             </a>
-            <p class="mt-1 mb-0" style="color:rgba(255,255,255,.45); font-size:.6rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase;">INTERNAL STAFF PORTAL</p>
+            <p style="color:rgba(255,255,255,.4);font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-top:8px;">INTERNAL STAFF PORTAL</p>
         </div>
 
-        <!-- Removed 'auth-card'. Using standard bg-white to bypass global padding rules -->
-        <div class="bg-white shadow-lg" style="border-radius: 12px; padding: 20px;">
+        <div class="auth-card">
 
             <div class="text-center mb-3">
-                <h4 class="fw-800 mb-0" style="letter-spacing:-.4px; font-size: 1rem;">Staff Authentication</h4>
-                <p class="text-muted mb-0" style="font-size:.7rem; margin-top:3px;">Sign in with your secure employee credentials.</p>
+                <h4 class="fw-800 mb-1" style="font-size:1.05rem;letter-spacing:-.4px;">Staff Authentication</h4>
+                <p class="text-muted mb-0" style="font-size:.8rem;">Sign in with your secure employee credentials.</p>
             </div>
 
             @if (!ViewData.ModelState.IsValid)
             {
-                <div class="alert alert-danger d-flex align-items-center gap-2 mb-3" style="padding: 6px 10px; font-size: .7rem; border-radius: 6px;">
+                <div class="alert alert-danger d-flex align-items-center gap-2 mb-3 py-2 px-3">
                     <i class="fa-solid fa-triangle-exclamation"></i>
-                    <span style="line-height: 1.2;">Invalid credentials.</span>
+                    <span>Invalid credentials.</span>
                 </div>
             }
 
             <form asp-controller="Auth" asp-action="Login" method="post">
-                <!-- Replaced 'input-wrap' with pure bootstrap positioning -->
                 <div class="mb-3">
-                    <label asp-for="Email" class="form-label" style="font-size:.65rem; margin-bottom:2px;">Staff Email</label>
-                    <div class="position-relative">
-                        <i class="fa-solid fa-id-badge position-absolute text-muted" style="font-size:.7rem; top: 50%; transform: translateY(-50%); left: 10px;"></i>
-                        <input asp-for="Email" class="form-control shadow-none" placeholder="employee@shieldinsure.com" required style="font-size:.75rem; padding: 6px 10px 6px 28px; min-height: 32px; border-radius: 6px;" />
+                    <label asp-for="Email" class="form-label">Staff Email</label>
+                    <div class="input-wrap">
+                        <i class="fa-solid fa-id-badge"></i>
+                        <input asp-for="Email" class="form-control" placeholder="employee@shieldinsure.com" required />
                     </div>
-                    <span asp-validation-for="Email" class="text-danger small d-block mt-1" style="font-size: .65rem;"></span>
+                    <span asp-validation-for="Email" class="text-danger small d-block mt-1"></span>
                 </div>
 
-                <div class="mb-3">
-                    <label asp-for="Password" class="form-label" style="font-size:.65rem; margin-bottom:2px;">Password</label>
-                    <div class="position-relative">
-                        <i class="fa-solid fa-lock position-absolute text-muted" style="font-size:.7rem; top: 50%; transform: translateY(-50%); left: 10px;"></i>
-                        <input asp-for="Password" type="password" class="form-control shadow-none" placeholder="••••••••" required style="font-size:.75rem; padding: 6px 10px 6px 28px; min-height: 32px; border-radius: 6px;" />
+                <div class="mb-4">
+                    <label asp-for="Password" class="form-label">Password</label>
+                    <div class="input-wrap">
+                        <i class="fa-solid fa-lock"></i>
+                        <input asp-for="Password" type="password" class="form-control" placeholder="••••••••" required />
                     </div>
-                    <span asp-validation-for="Password" class="text-danger small d-block mt-1" style="font-size: .65rem;"></span>
+                    <span asp-validation-for="Password" class="text-danger small d-block mt-1"></span>
                 </div>
 
-                <button type="submit" class="btn w-100 fw-bold border-0 text-white d-flex justify-content-center align-items-center shadow-none" style="background: linear-gradient(135deg, #0c387a, #1d4ed8); padding:8px; font-size:.8rem; border-radius: 6px;">
-                    <i class="fa-solid fa-fingerprint me-2 text-info"></i> Authorize Access
+                <button type="submit" class="btn btn-brand w-100 justify-content-center">
+                    <i class="fa-solid fa-fingerprint me-2"></i> Authorize Access
                 </button>
             </form>
 
-            <div class="text-center mt-3 pt-2" style="border-top:1px solid #e2e8f0;">
-                <p class="text-muted mb-0" style="font-size:.7rem;">
+            <div class="text-center mt-3 pt-3" style="border-top:1px solid var(--border);">
+                <p class="text-muted mb-0" style="font-size:.8125rem;">
                     New staff?
-                    <a asp-controller="Auth" asp-action="RegisterStaff" class="fw-bold text-decoration-none" style="color:#0c387a;">Request Onboarding</a>
+                    <a asp-controller="Auth" asp-action="RegisterStaff" class="fw-700 text-decoration-none" style="color:var(--brand-primary);">Request Onboarding</a>
                 </p>
             </div>
         </div>
 
         <div class="text-center mt-3">
-            <a asp-controller="Home" asp-action="Index" style="color:rgba(255,255,255,.4); font-size:.7rem; font-weight:600; text-decoration:none;">
-                <i class="fa-solid fa-arrow-left me-1"></i> Back Home
+            <a asp-controller="Home" asp-action="Index" style="color:rgba(255,255,255,.35);font-size:.8125rem;font-weight:600;text-decoration:none;">
+                <i class="fa-solid fa-arrow-left me-1"></i> Back to Homepage
             </a>
         </div>
 

@@ -71,10 +71,14 @@
                         <button class="topbar-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">
                             <i class="fa-solid fa-bars" style="font-size:1rem;"></i>
                         </button>
-                        <span class="topbar-title d-none d-sm-inline">@ViewData["Title"]</span>
-                        <div class="topbar-user">
-                            <div class="topbar-avatar">@User.Identity.Name.Substring(0, 1).ToUpper()</div>
-                            <span class="topbar-username">@User.Identity.Name</span>
+                        <div class="topbar-title-group">
+                            <span class="topbar-title">@ViewData["Title"]</span>
+                        </div>
+                        <div class="topbar-right">
+                            <div class="topbar-user d-none d-md-flex">
+                                <div class="topbar-avatar">@User.Identity.Name.Substring(0, 1).ToUpper()</div>
+                                <span class="topbar-username">@User.Identity.Name</span>
+                            </div>
                         </div>
                     </header>
                 }
@@ -126,6 +130,12 @@
                             <li class="nav-item"><a class="nav-link nav-link-glass" href="#faq">FAQ</a></li>
                             <li class="nav-item"><a class="nav-link nav-link-glass" href="#contact">Contact</a></li>
                         </ul>
+                        <div class="d-lg-none public-nav-mobile-actions">
+                            <a href="/Auth/Login" class="btn w-100 fw-700 rounded-pill py-2"
+                               style="background:rgba(56,189,248,0.12);border:1.5px solid rgba(56,189,248,0.4);color:#38bdf8;font-size:.85rem;">
+                                Sign In <i class="fa-solid fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
                     </div>
                     <div class="d-none d-lg-flex gap-2 align-items-center">
                         <a href="/Auth/Login" class="btn btn-sm fw-700 rounded-pill px-4 py-2"
@@ -164,43 +174,6 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script>
-            (function() {
-                var wrapper = document.getElementById('wrapper');
-                var toggle = document.getElementById('menuToggle');
-                var overlay = document.getElementById('sidebarOverlay');
-                var isMobile = window.innerWidth < 1024;
-
-                // Desktop: start open; Mobile: start closed
-                if (wrapper) {
-                    if (!isMobile) wrapper.classList.remove('toggled');
-                    else wrapper.classList.add('toggled');
-                }
-
-                if (toggle) {
-                    toggle.addEventListener('click', function() {
-                        if (wrapper) {
-                            wrapper.classList.toggle('toggled');
-                            var expanded = !wrapper.classList.contains('toggled');
-                            toggle.setAttribute('aria-expanded', expanded);
-                        }
-                    });
-                }
-                if (overlay) {
-                    overlay.addEventListener('click', function() {
-                        if (wrapper) wrapper.classList.add('toggled');
-                    });
-                }
-
-                // Highlight active nav
-                var links = document.querySelectorAll('.sidebar-link');
-                var path = window.location.pathname.toLowerCase();
-                links.forEach(function(l) {
-                    var href = (l.getAttribute('href') || '').toLowerCase();
-                    if (href && path === href) l.classList.add('active');
-                });
-            })();
-    </script>
     @await Html.PartialAsync("_ValidationScriptsPartial")
     @await RenderSectionAsync("Scripts", required: false)
 </body>
